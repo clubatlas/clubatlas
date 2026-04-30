@@ -1,0 +1,400 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 24px;
+  width: 672px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 이미지 헤더 */
+.imageHeader {
+  position: relative;
+  height: 192px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(135deg, #2a644d 0%, #609c22 100%);
+}
+
+.headerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.closeButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.categoryTag {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  background: #7f76e4;
+  border-radius: 18px;
+  padding: 8px 16px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* 콘텐츠 섹션 */
+.contentSection {
+  padding: 32px;
+}
+
+.eventTitle {
+  font-size: 30px;
+  font-weight: 700;
+  color: #101828;
+  margin: 0 0 8px 0;
+  line-height: 36px;
+}
+
+.relatedLink {
+  background: linear-gradient(90deg, #e7000b 0%, #f54900 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+/* 이벤트 정보 */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.infoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoIcon img {
+  width: 20px;
+  height: 20px;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #6a7282;
+  line-height: 20px;
+}
+
+.infoValue {
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  line-height: 24px;
+}
+
+/* About Section */
+.aboutSection {
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0 0 12px 0;
+  line-height: 24px;
+}
+
+.description {
+  font-size: 16px;
+  color: #4a5565;
+  line-height: 26px;
+  margin: 0;
+}
+
+/* Past Event Notice */
+.pastNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5dc;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #6a7282;
+  line-height: 20px;
+}
+
+/* Attendance Section */
+.attendanceSection {
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.sectionTitleWithIcon {
+  font-size: 16px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0 0 16px 0;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.attendanceOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioOption {
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.radioOption:hover {
+  border-color: #d1d5dc;
+}
+
+.radioOption.selected {
+  border-color: #2a644d;
+}
+
+.radioOptionDisabled {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.radioOptionDisabled:hover {
+  border-color: #e5e7eb;
+}
+
+.radioOptionDisabled .radioTitle {
+  color: #9ca3af;
+}
+
+.radioOptionDisabled .radioDescription {
+  color: #d1d5dc;
+}
+
+.radioInput {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #7f7f7f;
+  border-radius: 50%;
+  appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.radioInput:checked {
+  border-color: #2a644d;
+  border-width: 6px;
+}
+
+.radioContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.radioTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  line-height: 24px;
+}
+
+.radioDescription {
+  font-size: 14px;
+  color: #6a7282;
+  line-height: 20px;
+}
+
+.checkmark {
+  color: #00a63e;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+/* 저장 알림 */
+.savedNotification {
+  margin-top: 16px;
+  background: linear-gradient(to right, #f0fdf4 0%, #ecfdf5 100%);
+  border: 1px solid #b9f8cf;
+  border-radius: 14px;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkIcon {
+  color: #00a63e;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.notificationText {
+  color: #016630;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* 액션 버튼 */
+.actionButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.subscribeButton {
+  flex: 1;
+  background: linear-gradient(to right, #13412f 0%, #2a644d 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s;
+}
+
+.subscribeButton:hover {
+  opacity: 0.9;
+}
+
+.buttonIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.viewProfileButton {
+  flex: 1;
+  background: white;
+  color: #364153;
+  border: 2px solid #d1d5dc;
+  border-radius: 14px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.viewProfileButton:hover {
+  background: #f9fafb;
+}
+
+@media (max-width: 767px) {
+  .modalContent {
+    width: calc(100% - 32px);
+    max-height: 95vh;
+    border-radius: 16px;
+  }
+
+  .contentSection {
+    padding: 20px 16px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+}
+

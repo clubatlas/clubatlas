@@ -1,0 +1,99 @@
+.leadershipSection {
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 32px 0;
+}
+
+.leadersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.leaderCard {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.leaderCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+
+.name {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.role {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d6a4f;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.email {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.email:hover {
+  color: #2d6a4f;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .leadersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .leadersGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .leaderCard {
+    padding: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
+
+
+
+
+
+

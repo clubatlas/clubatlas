@@ -1,0 +1,415 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: white;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px var(--dashboard-padding-x, 48px);
+  z-index: 100;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoContainer {
+  width: 48px;
+  height: 48px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(160, 184, 136, 1) 0%, rgba(96, 156, 34, 1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  margin: 0;
+  background: linear-gradient(90deg, rgba(63, 95, 29, 1) 0%, rgba(96, 156, 34, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.4492px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6a7282;
+  margin: 0;
+  letter-spacing: -0.1504px;
+}
+
+.clubSwitcherContainer {
+  position: relative;
+}
+
+.subtitleButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6a7282;
+  letter-spacing: -0.1504px;
+  transition: color 0.15s;
+}
+
+.subtitleButton:hover {
+  color: #3f5f1d;
+}
+
+.chevron {
+  color: #6a7282;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.clubDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 200;
+  padding: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+.clubDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #374151;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.clubDropdownItem:hover {
+  background: #f3f4f6;
+}
+
+.clubDropdownItemActive {
+  color: #3f5f1d;
+  font-weight: 500;
+}
+
+.clubDropdownItemActive:hover {
+  background: #f0fdf4;
+}
+
+.checkIcon {
+  color: #609c22;
+  flex-shrink: 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+}
+
+.iconButton:first-child {
+  position: relative;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  background: #ef4444;
+  border-radius: 9px;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  padding: 0 3px;
+  box-sizing: border-box;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.textButton {
+  height: 36px;
+  padding: 8px 16px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #0a0a0a;
+  cursor: pointer;
+  letter-spacing: -0.1504px;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 13px;
+  border-left: 1px solid #e5e7eb;
+  height: 40px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(160, 184, 136, 1) 0%, rgba(96, 156, 34, 1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: white;
+  letter-spacing: -0.3125px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.userName {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #0a0a0a;
+  margin: 0;
+  letter-spacing: -0.1504px;
+}
+
+.userRole {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #6a7282;
+  margin: 0;
+}
+
+.notificationContainer {
+  position: relative;
+}
+
+.notificationDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  min-width: 360px;
+  max-width: 400px;
+  z-index: 1000;
+}
+
+.notificationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.notificationHeader h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.markAllReadButton {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #58931a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.markAllReadButton:hover {
+  background: #f3f4f6;
+}
+
+.notificationList {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notificationItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notificationItem:hover {
+  background: #f9fafb;
+}
+
+.notificationItem.unread {
+  background: #f0f9ff;
+}
+
+.notificationItem.unread:hover {
+  background: #e0f2fe;
+}
+
+.notificationContent {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.notificationTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.notificationText {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.notificationClub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #58931a;
+  font-weight: 500;
+}
+
+.notificationTime {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.emptyNotifications {
+  padding: 40px 20px;
+  text-align: center;
+  color: #9ca3af;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 16px var(--dashboard-padding-x, 24px);
+  }
+  
+  .rightSection {
+    gap: 8px;
+  }
+  
+  .textButton {
+    display: none;
+  }
+  
+  .userProfile {
+    padding-left: 8px;
+  }
+  
+  .userInfo {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+

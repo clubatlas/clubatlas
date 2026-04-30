@@ -1,0 +1,688 @@
+/* Page Wrapper */
+.pageWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Fixed Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 0 87px;
+  display: flex;
+  align-items: center;
+}
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0f3a29 0%, #2a644d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.logoIcon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0.0703px;
+  background: linear-gradient(90deg, #0f3a29 0%, #3a7860 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.navLink {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  color: #364153;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #2a644d;
+}
+
+.navLinkActive {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  color: #2a644d;
+  text-decoration: none;
+}
+
+/* Header Actions */
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.notificationButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4a5565;
+  transition: background 0.2s;
+}
+
+.notificationButton:hover {
+  background: #e5e7eb;
+}
+
+.profileButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f3a29 0%, #2a644d 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.profileButton:hover {
+  transform: scale(1.05);
+}
+
+/* Main Content */
+.mainWrapper {
+  padding: 72px 63px 80px;
+  background: linear-gradient(131.07deg, #f1fff6 0%, #daede1 100%);
+  flex: 1;
+}
+
+.container {
+  max-width: 1406px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Title Section */
+.titleSection {
+  padding: 48px 0 16px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: 0px;
+  background: linear-gradient(90deg, #0f3a29 0%, #3a7860 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.4492px;
+  color: #4a5565;
+  margin: 0;
+}
+
+/* Search Card */
+.searchCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.searchRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.searchInputWrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 0 18px;
+  height: 52px;
+  transition: border-color 0.2s;
+}
+
+.searchInputWrapper:focus-within {
+  border-color: #2a644d;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  color: #4a5565;
+  margin-right: 12px;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.3125px;
+  color: #0a0a0a;
+}
+
+.searchInput::placeholder {
+  color: rgba(10, 10, 10, 0.5);
+}
+
+.filterButton {
+  padding: 16px 24px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 14px;
+  color: #0a0a0a;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.filterButton:hover {
+  background: #e5e7eb;
+}
+
+.filterButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Filter Grid */
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+}
+
+.filterSelect {
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a0a0a;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filterSelect:focus {
+  border-color: #2a644d;
+}
+
+.filterSelectHighlight {
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid #f1c7c6;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a0a0a;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filterSelectHighlight:focus {
+  border-color: #e7000b;
+}
+
+.filterActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+}
+
+.clearFiltersButton {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5565;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clearFiltersButton:hover {
+  background: #e5e7eb;
+  color: #0a0a0a;
+}
+
+/* Results Header */
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultsCount {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  color: #4a5565;
+  margin: 0;
+}
+
+.sortSelect {
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a0a0a;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sortSelect:focus {
+  border-color: #2a644d;
+}
+
+/* Clubs Grid */
+.clubsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.clubCard {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clubCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.15), 0px 4px 6px -4px rgba(0, 0, 0, 0.15);
+}
+
+.clubImageWrapper {
+  position: relative;
+  height: 192px;
+  overflow: hidden;
+}
+
+.clubImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.clubImageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.clubCategory {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 33554400px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #0a0a0a;
+  z-index: 2;
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  color: #4a5565;
+  transition: all 0.2s;
+}
+
+.favoriteButton:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+}
+
+.clubName {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.4492px;
+  color: #ffffff;
+  margin: 0;
+  z-index: 2;
+}
+
+.clubContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.clubDescription {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.75px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 48px;
+}
+
+.clubMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+}
+
+.metaRow svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.clubActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.viewButton {
+  flex: 1;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #0f3a29 0%, #2a644d 100%);
+  border: none;
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  display: block;
+}
+
+.viewButton:hover {
+  background: linear-gradient(90deg, #0a2d1f 0%, #1f4d39 100%);
+  transform: translateY(-2px);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.2), 0px 4px 6px -4px rgba(0, 0, 0, 0.2);
+}
+
+.shareButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #f3f4f6;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4a5565;
+  transition: background 0.2s;
+}
+
+.shareButton:hover {
+  background: #e5e7eb;
+}
+
+.shareButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Load More */
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.loadMoreButton {
+  padding: 16px 32px;
+  background: #ffffff;
+  border: none;
+  border-radius: 14px;
+  color: #364153;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  cursor: pointer;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.loadMoreButton:hover {
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.15), 0px 4px 6px -4px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer */
+.footer {
+  background: #101828;
+  padding: 0 63px;
+}
+
+.footerContent {
+  border-top: 1px solid #1e2939;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.footerContent p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #99a1af;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .clubsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filterGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header {
+    padding: 0 40px;
+  }
+
+  .mainWrapper {
+    padding: 72px 40px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clubsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .filterGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .header {
+    padding: 0 24px;
+  }
+
+  .mainWrapper {
+    padding: 72px 24px 80px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .searchRow {
+    flex-direction: column;
+  }
+
+  .filterButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .resultsHeader {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .sortSelect {
+    width: 100%;
+  }
+}

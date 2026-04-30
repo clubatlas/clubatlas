@@ -1,0 +1,177 @@
+.eventCard {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.leftSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 28px;
+}
+
+.eventTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.4492px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+}
+
+.statusUpcoming {
+  background: #dcfce7;
+  color: #008236;
+}
+
+.statusCompleted {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.statusCancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.infoIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.infoText {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.viewButton,
+.reminderButton {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 8px 16px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.viewButton:hover,
+.reminderButton:hover {
+  background: #e5e7eb;
+}
+
+.viewButton {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #0a0a0a;
+}
+
+.reminderButton {
+  gap: 8px;
+}
+
+.actionIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.reminderButton span {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #0a0a0a;
+}
+
+.rightSection {
+  display: flex;
+  gap: 8px;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.iconButton:hover {
+  background: #e5e7eb;
+}
+
+.buttonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,217 @@
+.container {
+  position: relative;
+}
+
+.mainContent {
+  padding-top: 120px;
+  padding-left: 87px;
+  padding-right: 87px;
+  display: flex;
+  gap: 24px;
+  min-height: calc(100vh - 120px);
+  padding-bottom: 48px;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  overflow-x: visible;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+  color: #0a0a0a;
+  margin: 0;
+  letter-spacing: 0.3955px;
+}
+
+.assignButton {
+  background: linear-gradient(to right, #0f3a29, #2a644d);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 14px;
+  height: 48px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: white;
+  cursor: pointer;
+  letter-spacing: -0.3125px;
+}
+
+.assignButton:hover {
+  opacity: 0.9;
+}
+
+.assignButton:active {
+  transform: translateY(1px);
+}
+
+.assignButtonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.tab {
+  padding: 12px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: -0.3125px;
+}
+
+.tab:hover {
+  color: #374151;
+}
+
+.tabActive {
+  color: #0f3a29;
+  border-bottom-color: #0f3a29;
+}
+
+.tableWrapper {
+  width: 900px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.searchSection {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.searchContainer {
+  flex: 1;
+  background: #f9fafb;
+  border-radius: 14px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0a0a0a;
+  outline: none;
+  letter-spacing: -0.3125px;
+}
+
+.searchInput::placeholder {
+  color: rgba(10, 10, 10, 0.5);
+}
+
+.searchButton {
+  background: #58931a;
+  border: none;
+  border-radius: 14px;
+  height: 48px;
+  padding: 0 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: white;
+  cursor: pointer;
+  letter-spacing: -0.3125px;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+}
+
+.searchButton:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 1200px) {
+  .mainContent {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .tableWrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .mainContent {
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 80px;
+  }
+
+  .header {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+}
+
+
+
+
+
+
+
+
+

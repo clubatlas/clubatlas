@@ -1,0 +1,50 @@
+.container {
+  background: white;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.background {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(129.81deg, rgba(241, 255, 246, 1) 0%, rgba(218, 237, 225, 1) 100%);
+  padding-top: 72px;
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overviewTab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.twoColumnGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .twoColumnGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+

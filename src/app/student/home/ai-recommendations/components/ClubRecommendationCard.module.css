@@ -1,0 +1,273 @@
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.cardHeader {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rankBadge {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rankNumber {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.scoreContainer {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scoreBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scoreBarFill {
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.scoreText {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  align-self: flex-end;
+}
+
+.cardContent {
+  padding: 24px;
+  flex: 1;
+}
+
+.clubName {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 8px 0;
+}
+
+.clubTagline {
+  font-size: 16px;
+  font-weight: 500;
+  color: #667eea;
+  margin: 0 0 12px 0;
+  font-style: italic;
+}
+
+.clubDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a5568;
+  margin: 0 0 16px 0;
+}
+
+.categoryTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.categoryTag {
+  padding: 6px 12px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.activityTypeTag {
+  padding: 6px 12px;
+  background: #ebf4ff;
+  border: 1px solid #bee3f8;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c5282;
+}
+
+.reasonsSection {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.reasonsTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reasonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reasonItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  padding-left: 12px;
+  background: white;
+  border-radius: 8px;
+  border-left: 3px solid #4A90E2;
+  transition: all 0.2s ease;
+}
+
+.reasonItem:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.reasonIcon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.reasonText {
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.cardFooter {
+  padding: 20px;
+  background: #f7fafc;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.viewDetailsButton {
+  flex: 1;
+  padding: 12px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.viewDetailsButton:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.subscribeButton {
+  padding: 12px 24px;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subscribeButton:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.subscribeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.subscribeButtonActive {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.subscribeButtonActive:hover {
+  background: #5568d3;
+  border-color: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .cardHeader {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .scoreContainer {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .clubName {
+    font-size: 20px;
+  }
+
+  .reasonsSection {
+    padding: 12px;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .viewDetailsButton,
+  .subscribeButton {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+  }
+}
+
+

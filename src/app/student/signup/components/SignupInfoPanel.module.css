@@ -1,0 +1,157 @@
+.panel {
+  position: relative;
+  width: 512px;
+  min-width: 512px;
+  background: linear-gradient(112.8deg, rgba(17, 61, 44, 1) 0%, rgba(42, 100, 77, 1) 100%);
+  border-radius: 24px 0 0 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* 배경 장식 원형 */
+.decorativeCircle1 {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  left: 384px;
+  top: -128px;
+  background: white;
+  border-radius: 33554400px;
+  opacity: 0.1;
+}
+
+.decorativeCircle2 {
+  position: absolute;
+  width: 192px;
+  height: 192px;
+  left: -96px;
+  bottom: 0;
+  transform: translateY(50%);
+  background: white;
+  border-radius: 33554400px;
+  opacity: 0.1;
+}
+
+.content {
+  position: absolute;
+  left: 48px;
+  top: 254.69px;
+  width: 416px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.iconContainer {
+  width: 64px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 40px;
+  color: white;
+  margin: 0;
+  letter-spacing: 0.3691px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  letter-spacing: 0.0703px;
+}
+
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 397px;
+  letter-spacing: -0.3125px;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checkIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.featureTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.1504px;
+}
+
+.featureDescription {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+@media (max-width: 1199px) {
+  .panel {
+    width: 40%;
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .panel {
+    display: none;
+  }
+}
+
+
+

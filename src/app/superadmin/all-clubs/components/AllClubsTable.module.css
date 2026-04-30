@@ -1,0 +1,402 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.searchSection {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.searchContainer {
+  width: 100%;
+  max-width: 520px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0a0a0a;
+  outline: none;
+  letter-spacing: -0.3125px;
+}
+
+.searchInput::placeholder {
+  color: rgba(10, 10, 10, 0.5);
+}
+
+.dropdown {
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  height: 48px;
+  padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0a0a0a;
+  background: white;
+  cursor: pointer;
+  outline: none;
+  min-width: 140px;
+}
+
+.dropdown:hover {
+  border-color: #d1d5db;
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tableHeader {
+  background: #F9FAFB;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0a0a0a;
+  letter-spacing: -0.3125px;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableRow {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 65px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #FFFFFF;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRowFirst {
+  background: #FFFFFF;
+}
+
+.clubNameLink {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0a0a0a;
+  text-decoration: underline;
+  letter-spacing: -0.3125px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clubNameLink:hover {
+  color: #2d6a4e;
+}
+
+.columnClubName {
+  width: 200px;
+  min-width: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0a0a0a;
+  letter-spacing: -0.3125px;
+  overflow: hidden;
+}
+
+.columnCategory {
+  width: 200px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.columnLeader {
+  width: 132px;
+}
+
+.columnMembers {
+  width: 132px;
+}
+
+.columnStatus {
+  width: 120px;
+}
+
+.columnActions {
+  width: 80px;
+  display: flex;
+  gap: 4px;
+}
+
+.categoryBadge {
+  background: #ebf8ff;
+  color: #3182ce;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderText {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #4a5565;
+  letter-spacing: -0.1504px;
+}
+
+.membersText {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #4a5565;
+  letter-spacing: -0.1504px;
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  display: inline-block;
+}
+
+.statusACTIVE {
+  background: #d4edda;
+  color: #198754;
+}
+
+.statusPENDING {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusINACTIVE {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.actionButton {
+  width: 32px;
+  height: 32px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.actionButton:hover {
+  background: #e5e7eb;
+}
+
+.actionButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.deleteButton:hover {
+  background: #fee2e2;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #364153;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.pageButton:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.pageButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pageButtonActive {
+  background: linear-gradient(90deg, #4f812b 0%, #6aa84f 100%);
+  border-color: transparent;
+  color: white;
+  font-weight: 500;
+}
+
+.pageButtonActive:hover {
+  opacity: 0.95;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.deleteModal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.deleteModalTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.deleteModalMessage {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #4a5565;
+  margin: 0;
+}
+
+.deleteModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancelButton {
+  height: 40px;
+  padding: 0 20px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #364153;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.confirmDeleteButton {
+  height: 40px;
+  padding: 0 20px;
+  background: #dc2626;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmDeleteButton:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.confirmDeleteButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (max-width: 1200px) {
+  .tableHeader,
+  .tableRow {
+    padding: 0 16px;
+  }
+}
+
+
+
+
+
+
+
+
+

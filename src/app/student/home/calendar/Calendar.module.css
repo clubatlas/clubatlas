@@ -1,0 +1,680 @@
+/* Page Wrapper */
+.pageWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Fixed Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 0 87px;
+  display: flex;
+  align-items: center;
+}
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0f3a29 0%, #2a644d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 400;
+  background: linear-gradient(90deg, #0f3a29 0%, #3a7860 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navLink,
+.navLinkActive {
+  font-size: 16px;
+  font-weight: 500;
+  color: #364153;
+  text-decoration: none;
+  letter-spacing: -0.3125px;
+  transition: color 0.2s;
+}
+
+.navLinkActive {
+  font-weight: 800;
+  color: #2a644d;
+}
+
+.navLink:hover {
+  color: #2a644d;
+}
+
+/* Header Actions */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notificationButton,
+.profileButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notificationButton {
+  background: #f3f4f6;
+}
+
+.profileButton {
+  background: linear-gradient(135deg, #0f3a29 0%, #2a644d 100%);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Wrapper */
+.mainWrapper {
+  flex: 1;
+  background: linear-gradient(131.86deg, rgba(241, 255, 246, 1) 0%, rgba(218, 237, 225, 1) 100%);
+  padding: 48px 63px 70px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Title Section */
+.titleSection {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 48px;
+  background: linear-gradient(90deg, #0f3a29 0%, #3a7860 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #4a5565;
+  letter-spacing: -0.4492px;
+  margin: 0;
+}
+
+/* Content Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.viewModeCard {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cardHeader h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a0a0a;
+  margin: 0;
+  letter-spacing: -0.3125px;
+}
+
+.viewModeButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.viewModeButton {
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #364153;
+  letter-spacing: -0.3125px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewModeButtonActive {
+  background: #13412f;
+  color: white;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.viewModeButtonActive img {
+  filter: brightness(0) invert(1);
+}
+
+.createButton {
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: #609c22;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding-left: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.3125px;
+  cursor: pointer;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s;
+}
+
+.createButton:hover {
+  background: #538618;
+}
+
+.exportButton,
+.subscribeButton {
+  height: 58px;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #364153;
+  letter-spacing: -0.3125px;
+  cursor: pointer;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.exportButton:hover,
+.subscribeButton:hover {
+  background: #f9fafb;
+}
+
+/* Calendar Area */
+.calendarArea {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.monthNavigation {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  height: 90px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.navButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.navButton:hover {
+  background: #f9fafb;
+}
+
+.monthTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  background: linear-gradient(90deg, #134230 0%, #2a644d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+/* Calendar Card */
+.calendarCard {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  min-height: 687px;
+}
+
+.calendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dayHeader {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #364153;
+  letter-spacing: -0.1504px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.dayHeader:last-child {
+  border-right: none;
+}
+
+.calendarBody {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 512px;
+}
+
+.calendarDay {
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px;
+  position: relative;
+  min-height: 128px;
+  min-width: 0;
+}
+
+.calendarDay:nth-child(7n) {
+  border-right: none;
+}
+
+.otherMonth {
+  background: #f9fafb;
+}
+
+.dayNumber {
+  font-size: 14px;
+  font-weight: 500;
+  color: #101828;
+  letter-spacing: -0.1504px;
+}
+
+.todayBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb2c36 0%, #f54900 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.1504px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.eventsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.eventTag {
+  height: 24px;
+  line-height: 24px;
+  border-radius: 10px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.eventTag:hover {
+  opacity: 0.9;
+}
+
+/* Upcoming Events */
+.upcomingCard {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.upcomingHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.upcomingHeader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #101828;
+  margin: 0;
+  letter-spacing: -0.4492px;
+}
+
+.upcomingList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.upcomingItem {
+  background: #f9fafb;
+  border-radius: 14px;
+  height: 100px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.eventBar {
+  width: 4px;
+  height: 64px;
+  border-radius: 33554400px;
+}
+
+.eventInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eventDateTime {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.eventDate {
+  font-size: 14px;
+  font-weight: 600;
+  color: #101828;
+  letter-spacing: -0.1504px;
+}
+
+.eventTime {
+  font-size: 14px;
+  font-weight: 400;
+  color: #4a5565;
+  letter-spacing: -0.1504px;
+}
+
+.eventClub {
+  font-size: 16px;
+  font-weight: 700;
+  color: #101828;
+  margin: 0;
+  letter-spacing: -0.3125px;
+}
+
+.eventName {
+  font-size: 14px;
+  font-weight: 400;
+  color: #4a5565;
+  margin: 0;
+  letter-spacing: -0.1504px;
+}
+
+.categoryBadge {
+  height: 24px;
+  border-radius: 10px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.viewClubButton {
+  height: 36px;
+  width: 92px;
+  border-radius: 10px;
+  border: none;
+  background: #58931a;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.1504px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewClubButton:hover {
+  background: #4a7915;
+}
+
+/* Footer */
+.footer {
+  background: #101828;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 63px;
+}
+
+.footerContent {
+  width: 100%;
+  max-width: 1280px;
+  text-align: center;
+  border-top: 1px solid #1e2939;
+  padding-top: 16px;
+}
+
+.footerContent p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #99a1af;
+  letter-spacing: -0.1504px;
+  margin: 0;
+  line-height: 20px;
+}
+
+/* Loading, Error, Empty States */
+.loading,
+.error {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 16px;
+  color: #6b7280;
+  background: white;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.emptyUpcoming {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.moreEvents {
+  font-size: 11px;
+  color: #6b7280;
+  padding: 2px 4px;
+  margin-top: 2px;
+}
+
+.eventLocation {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+@media (max-width: 1199px) {
+  .header {
+    padding: 0 32px;
+  }
+
+  .mainWrapper {
+    padding: 48px 32px 70px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .mainWrapper {
+    padding: 24px 16px 40px;
+  }
+
+  .titleSection {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .viewModeCard {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .calendarCard {
+    min-height: auto;
+  }
+
+  .calendarDay {
+    min-height: 60px;
+    padding: 4px;
+  }
+
+  .dayHeader {
+    font-size: 12px;
+  }
+
+  .footer {
+    padding: 0 16px;
+  }
+}
+

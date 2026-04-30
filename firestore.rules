@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      // 사용자는 자신의 문서만 읽고 쓸 수 있음
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // 관리자는 모든 사용자 문서에 접근 가능
+      allow read: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.role == 'super-admin');
+    }
+    
+    // Clubs collection
+    match /clubs/{clubId} {
+      // 모든 인증된 사용자는 읽기 가능
+      allow read: if request.auth != null;
+      
+      // 클럽 리더와 관리자만 작성 가능
+      allow write: if request.auth != null && 
+        (request.auth.token.role == 'club-leader' || 
+         request.auth.token.role == 'admin' || 
+         request.auth.token.role == 'super-admin');
+    }
+    
+    // Events collection
+    match /events/{eventId} {
+      // 모든 인증된 사용자는 읽기 가능
+      allow read: if request.auth != null;
+      
+      // 클럽 리더와 관리자만 작성 가능
+      allow write: if request.auth != null && 
+        (request.auth.token.role == 'club-leader' || 
+         request.auth.token.role == 'admin' || 
+         request.auth.token.role == 'super-admin');
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+

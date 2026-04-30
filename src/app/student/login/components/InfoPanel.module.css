@@ -1,0 +1,153 @@
+.panel {
+  position: relative;
+  width: 512px;
+  min-width: 512px; /* 고정 너비 보장 */
+  height: 766px;
+  background: linear-gradient(123.76deg, rgba(15, 58, 41, 1) 0%, rgba(42, 100, 77, 1) 100%);
+  border-radius: 24px 0 0 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* 배경 장식 원형 */
+.decorativeCircle1 {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  left: 384px;
+  top: -128px;
+  background: white;
+  border-radius: 33554400px;
+  opacity: 0.1;
+}
+
+.decorativeCircle2 {
+  position: absolute;
+  width: 192px;
+  height: 192px;
+  left: -96px;
+  top: 670px;
+  background: white;
+  border-radius: 33554400px;
+  opacity: 0.1;
+}
+
+.content {
+  position: absolute;
+  left: 48px;
+  top: 183px;
+  width: 416px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.iconContainer {
+  width: 64px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 40px;
+  color: white;
+  margin: 0;
+  letter-spacing: 0.3691px;
+  position: absolute;
+  top: 88px;
+  left: 0;
+  width: 416px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  letter-spacing: 0.0703px;
+  position: absolute;
+  top: 144px;
+  left: 0;
+  width: 416px;
+}
+
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 404px;
+  letter-spacing: -0.3125px;
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 416px;
+  height: 52px;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: absolute;
+  top: 284px;
+  left: 0;
+  width: 416px;
+  height: 116px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.1504px;
+}
+
+.bullet {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1199px) {
+  .panel {
+    width: 40%;
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .panel {
+    display: none;
+  }
+}
+
+

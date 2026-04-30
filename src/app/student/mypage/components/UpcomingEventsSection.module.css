@@ -1,0 +1,168 @@
+.section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.4492px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.fullCalendar {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #155dfc;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.fullCalendar:hover {
+  opacity: 0.8;
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eventCard {
+  border: 1px solid #bedbff;
+  border-radius: 14px;
+  padding: 17px;
+  background: linear-gradient(164.33deg, rgba(239, 246, 255, 1) 0%, rgba(250, 245, 255, 1) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eventInfo {
+  display: flex;
+  gap: 12px;
+}
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #155dfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.eventDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clubName {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+  margin: 0;
+}
+
+.eventName {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3125px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.dateTime {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #4a5565;
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.viewDetailsButton {
+  flex: 1;
+  height: 38px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.viewDetailsButton:hover {
+  background: #f9fafb;
+}
+
+.addCalendarButton {
+  flex: 1;
+  height: 38px;
+  background: #58931a;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1504px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.addCalendarButton:hover {
+  opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+

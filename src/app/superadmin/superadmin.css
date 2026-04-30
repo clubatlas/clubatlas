@@ -1,0 +1,18 @@
+/* Override global styles for superadmin pages */
+body:has(.superadmin-layout) {
+  background: linear-gradient(134.55deg, #f1fff6 0%, #eaf5f2 50%, #f1fff6 100%) !important;
+  min-height: 100vh;
+}
+
+html:has(.superadmin-layout) {
+  background: linear-gradient(134.55deg, #f1fff6 0%, #eaf5f2 50%, #f1fff6 100%) !important;
+}
+
+
+
+
+
+
+
+
+

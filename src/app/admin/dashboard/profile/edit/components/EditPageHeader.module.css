@@ -1,0 +1,12 @@
+.title {
+  margin: 24px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+  color: transparent;
+  background: linear-gradient(90deg, #3f5f1d 0%, #609c22 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.4492px;
+}

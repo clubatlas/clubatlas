@@ -1,0 +1,134 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  overflow-x: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(137.24deg, rgb(241, 255, 246) 0%, rgb(239, 246, 255) 50%, rgb(241, 255, 246) 100%);
+  overflow: hidden;
+}
+
+/* 배경 블러 효과 원형 장식 */
+.blurCircle1 {
+  position: absolute;
+  width: 287.692px;
+  height: 287.692px;
+  left: 6%;
+  top: 65.53px;
+  background: #a1d867;
+  border-radius: 33554400px;
+  filter: blur(24px);
+  opacity: 0.2;
+}
+
+.blurCircle2 {
+  position: absolute;
+  width: 308.832px;
+  height: 308.832px;
+  right: 15%;
+  top: 113.42px;
+  background: #d5faae;
+  border-radius: 33554400px;
+  filter: blur(24px);
+  opacity: 0.2;
+}
+
+.blurCircle3 {
+  position: absolute;
+  width: 288px;
+  height: 288px;
+  left: 50%;
+  top: 990px;
+  transform: translateX(-50%);
+  background: #a8d479;
+  border-radius: 33554400px;
+  filter: blur(24px);
+  opacity: 0.2;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* 상단 헤더 섹션 - 숨김 */
+.headerSection {
+  display: none;
+}
+
+.mainTitle {
+  display: none;
+}
+
+.subtitle {
+  display: none;
+}
+
+/* 중앙 로그인 카드 */
+.loginCard {
+  display: flex;
+  width: 1024px;
+  height: 766px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* 푸터 - 숨김 */
+.footer {
+  display: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1199px) {
+  .content {
+    padding: 40px 32px;
+  }
+
+  .loginCard {
+    width: 100%;
+    max-width: 1024px;
+    height: auto;
+    min-height: 766px;
+  }
+}
+
+@media (max-width: 767px) {
+  .content {
+    padding: 16px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .loginCard {
+    flex-direction: column;
+    width: calc(100% - 0px);
+    max-width: 480px;
+    height: auto;
+    min-height: unset;
+  }
+
+  .blurCircle1,
+  .blurCircle2,
+  .blurCircle3 {
+    display: none;
+  }
+}
+
+

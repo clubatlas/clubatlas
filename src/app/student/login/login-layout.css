@@ -1,0 +1,13 @@
+/* Student Login 페이지 전용 레이아웃 스타일 */
+/* globals.css의 body 스타일을 재정의하여 flex 레이아웃 제거 */
+
+body {
+  display: block;
+  justify-content: initial;
+  align-items: initial;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+}

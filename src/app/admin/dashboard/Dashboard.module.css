@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+  width: 100%;
+  --dashboard-padding-x: 48px;
+}
+
+.mainContent {
+  padding-top: 136px;
+  display: flex;
+  gap: 24px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 32px;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.eventsContent,
+.announcementsContent,
+.subscribersContent,
+.analyticsContent {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1199px) {
+  .mainContent {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    --dashboard-padding-x: 16px;
+  }
+
+  .mainContent {
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 136px;
+    padding-bottom: 24px;
+  }
+}
+
+
