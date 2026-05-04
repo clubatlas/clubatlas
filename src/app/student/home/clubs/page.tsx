@@ -222,14 +222,12 @@ export default function BrowseClubsPage() {
 
   const getMeetingInfo = (club: Club) => {
     if (club.meeting_schedule && club.meeting_schedule.length > 0) {
-      // 요일의 첫 글자만 추출하고 / 로 연결
       const dayAbbreviations = club.meeting_schedule
         .map(s => s.day)
         .filter(Boolean)
         .map(day => day.charAt(0))
         .join(' / ');
-      
-      // 모든 시간대 수집 (중복 제거) 후 오름차순 정렬
+
       const allTimes = new Set<string>();
       club.meeting_schedule.forEach(s => {
         if (s.time_slots && s.time_slots.length > 0) {
@@ -237,8 +235,7 @@ export default function BrowseClubsPage() {
         }
       });
       const sortedTimes = Array.from(allTimes).sort().join(', ');
-      
-      // 위치 (첫 번째 것 사용)
+
       const location = club.meeting_schedule[0].location || 'TBD';
       
       return {

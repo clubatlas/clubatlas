@@ -36,16 +36,13 @@ interface Props {
 export default function ClubRecommendationCard({ recommendation, clubData }: Props) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // clubData가 없으면 기본 정보만 표시
   const displayName = clubData?.name || `Club ${recommendation.club_id}`;
   const displayDescription = clubData?.description || 'Loading club information...';
   const displayCategories = clubData?.categories || [];
   const displayActivityType = clubData?.activity_type;
 
-  // 추천 점수를 0-100 스케일로 변환 (최대 13.5점 기준)
   const scorePercentage = Math.min(100, Math.round((recommendation.score / 13.5) * 100));
 
-  // 구독 상태 확인
   useEffect(() => {
     const fetchSubscriptionStatus = async () => {
       try {
@@ -61,7 +58,6 @@ export default function ClubRecommendationCard({ recommendation, clubData }: Pro
     fetchSubscriptionStatus();
   }, [recommendation.club_id]);
 
-  // 구독/구독 취소 처리
   const handleSubscribeToggle = async () => {
     setIsLoading(true);
     try {
@@ -90,7 +86,6 @@ export default function ClubRecommendationCard({ recommendation, clubData }: Pro
     }
   };
 
-  // 이유 타입별 아이콘 및 색상
   const getReasonStyle = (type: string) => {
     switch (type) {
       case 'category_match':

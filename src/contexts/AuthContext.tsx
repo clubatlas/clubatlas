@@ -1,6 +1,3 @@
-/**
- * 인증 컨텍스트 - 전역 인증 상태 관리
- */
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -114,7 +111,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  // 역할 확인 헬퍼 함수들
   const isAuthenticated = !!user && !!userProfile;
   const isStudent = userProfile?.role === 'student';
   const isClubLeader = userProfile?.role === 'club-leader' || userProfile?.role === 'admin';
@@ -123,7 +119,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const hasRole = (role: string): boolean => {
     if (!userProfile) return false;
     
-    // admin과 club-leader는 동의어
     if (role === 'admin' || role === 'club-leader') {
       return userProfile.role === 'admin' || userProfile.role === 'club-leader';
     }

@@ -1,5 +1,5 @@
 """
-Subscription 데이터 모델
+Subscription data models
 """
 from typing import Optional, List
 from datetime import datetime
@@ -7,27 +7,27 @@ from pydantic import BaseModel, Field
 
 
 class Subscription(BaseModel):
-    """구독 정보"""
+    """Subscription information"""
     id: Optional[str] = None
-    user_id: str = Field(..., description="구독자 UID")
-    club_id: str = Field(..., description="동아리 ID")
+    user_id: str = Field(..., description="Subscriber UID")
+    club_id: str = Field(..., description="Club ID")
     subscribed_at: datetime = Field(default_factory=datetime.now)
     is_active: bool = True
     notification_enabled: bool = True
 
 
 class SubscriptionCreate(BaseModel):
-    """구독 생성 요청"""
+    """Subscription creation request"""
     club_id: str
 
 
 class SubscriptionUpdate(BaseModel):
-    """구독 업데이트 요청"""
+    """Subscription update request"""
     notification_enabled: Optional[bool] = None
 
 
 class SubscriptionResponse(BaseModel):
-    """구독 정보 응답"""
+    """Subscription response"""
     id: str
     user_id: str
     club_id: str
@@ -37,13 +37,13 @@ class SubscriptionResponse(BaseModel):
 
 
 class SubscriptionListResponse(BaseModel):
-    """구독 목록 응답"""
+    """Subscription list response"""
     subscriptions: List[SubscriptionResponse]
     total: int
 
 
 class SubscriberResponse(BaseModel):
-    """구독자 정보 응답 (관리자용 - 사용자 정보 포함)"""
+    """Subscriber response (admin use - includes user info)"""
     id: str
     user_id: str
     user_email: Optional[str] = None
@@ -55,8 +55,6 @@ class SubscriberResponse(BaseModel):
 
 
 class SubscriberListResponse(BaseModel):
-    """구독자 목록 응답 (관리자용)"""
+    """Subscriber list response (admin use)"""
     subscribers: List[SubscriberResponse]
     total: int
-
-

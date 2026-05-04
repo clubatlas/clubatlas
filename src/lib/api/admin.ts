@@ -1,5 +1,5 @@
 /**
- * SuperAdmin 전용 API 클라이언트
+ * SuperAdmin-only API client
  */
 import { apiClient, ApiResponse } from './client';
 import { LeaderAccessRequestResponse } from './auth';

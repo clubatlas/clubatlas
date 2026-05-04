@@ -1,7 +1,3 @@
-/**
- * 보호된 라우트 컴포넌트
- * 인증 및 역할 기반 접근 제어
- */
 'use client';
 
 import { useEffect } from 'react';
@@ -27,19 +23,16 @@ export default function ProtectedRoute({
   useEffect(() => {
     if (loading) return;
 
-    // 인증 필요한데 로그인 안 됨
     if (requireAuth && !user) {
       const redirect = redirectTo || getDefaultRedirect('login');
       router.push(redirect);
       return;
     }
 
-    // 역할 확인
     if (requiredRole && user && userProfile) {
       const hasRequiredRole = hasRole(requiredRole);
-      
+
       if (!hasRequiredRole) {
-        // 권한 부족 - 적절한 페이지로 리다이렉트
         const redirect = redirectTo || getDefaultRedirect(userProfile.role);
         router.push(redirect);
         return;
@@ -47,7 +40,6 @@ export default function ProtectedRoute({
     }
   }, [user, userProfile, loading, requiredRole, requireAuth, redirectTo, hasRole, router]);
 
-  // 로딩 중
   if (loading) {
     return (
       <div style={{
@@ -63,12 +55,10 @@ export default function ProtectedRoute({
     );
   }
 
-  // 인증 필요한데 로그인 안 됨
   if (requireAuth && !user) {
     return null;
   }
 
-  // 역할 확인 필요
   if (requiredRole && (!userProfile || !hasRole(requiredRole))) {
     return null;
   }
@@ -76,9 +66,6 @@ export default function ProtectedRoute({
   return <>{children}</>;
 }
 
-/**
- * 역할별 기본 리다이렉트 경로
- */
 function getDefaultRedirect(type: string): string {
   switch (type) {
     case 'student':
@@ -94,5 +81,3 @@ function getDefaultRedirect(type: string): string {
       return '/welcome';
   }
 }
-
-

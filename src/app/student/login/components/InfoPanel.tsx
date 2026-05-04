@@ -5,10 +5,9 @@ const studentPortalIcon = "/images/icons/student-login/student-portal.svg";
 export default function InfoPanel() {
   return (
     <div className={styles.panel}>
-      {/* 배경 장식 원형 */}
       <div className={styles.decorativeCircle1}></div>
       <div className={styles.decorativeCircle2}></div>
-      
+
       <div className={styles.content}>
         <div className={styles.iconContainer}>
           <img 

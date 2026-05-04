@@ -1,5 +1,5 @@
 """
-SuperAdmin 전용 데이터 모델
+SuperAdmin-only data models
 """
 from typing import Optional, List, Dict, Any
 from datetime import datetime
@@ -7,25 +7,25 @@ from pydantic import BaseModel, Field
 
 
 class PlatformStatistics(BaseModel):
-    """플랫폼 전체 통계"""
-    total_clubs: int = Field(..., description="전체 클럽 수")
-    active_clubs: int = Field(..., description="활성 클럽 수")
-    inactive_clubs: int = Field(..., description="비활성 클럽 수")
-    pending_clubs: int = Field(0, description="승인 대기 클럽 수")
-    total_leaders: int = Field(..., description="전체 리더 수")
-    active_leaders: int = Field(..., description="활성 리더 수")
-    pending_leader_requests: int = Field(0, description="리더 승인 대기 수")
-    total_students: int = Field(..., description="전체 학생 수")
-    new_students_this_week: int = Field(0, description="이번 주 신규 학생")
-    total_events: int = Field(..., description="전체 이벤트 수")
-    upcoming_events: int = Field(0, description="예정된 이벤트 수")
-    total_subscriptions: int = Field(..., description="전체 구독 수")
+    """Platform-wide statistics"""
+    total_clubs: int = Field(..., description="Total number of clubs")
+    active_clubs: int = Field(..., description="Number of active clubs")
+    inactive_clubs: int = Field(..., description="Number of inactive clubs")
+    pending_clubs: int = Field(0, description="Number of clubs pending approval")
+    total_leaders: int = Field(..., description="Total number of leaders")
+    active_leaders: int = Field(..., description="Number of active leaders")
+    pending_leader_requests: int = Field(0, description="Number of pending leader requests")
+    total_students: int = Field(..., description="Total number of students")
+    new_students_this_week: int = Field(0, description="New students this week")
+    total_events: int = Field(..., description="Total number of events")
+    upcoming_events: int = Field(0, description="Number of upcoming events")
+    total_subscriptions: int = Field(..., description="Total number of subscriptions")
 
 
 class PendingApprovalItem(BaseModel):
-    """승인 대기 항목"""
+    """Pending approval item"""
     id: str
-    type: str = Field(..., description="유형: club_request, leader_request, club_update")
+    type: str = Field(..., description="Type: club_request, leader_request, club_update")
     title: str
     subtitle: str
     timestamp: datetime
@@ -33,29 +33,29 @@ class PendingApprovalItem(BaseModel):
 
 
 class PendingApprovalsResponse(BaseModel):
-    """승인 대기 목록 응답"""
+    """Pending approvals list response"""
     approvals: List[PendingApprovalItem]
     total: int
 
 
 class ActivityLogItem(BaseModel):
-    """활동 로그 항목"""
+    """Activity log item"""
     id: str
-    type: str = Field(..., description="유형: club_created, event_posted, profile_updated 등")
+    type: str = Field(..., description="Type: club_created, event_posted, profile_updated, etc.")
     title: str
     subtitle: str
     timestamp: datetime
-    is_new: bool = Field(default=False, description="최근 1시간 이내 항목")
+    is_new: bool = Field(default=False, description="Created within the last hour")
 
 
 class RecentActivityResponse(BaseModel):
-    """최근 활동 응답"""
+    """Recent activity response"""
     activities: List[ActivityLogItem]
     total: int
 
 
 class SystemAlert(BaseModel):
-    """시스템 알림"""
+    """System alert"""
     id: str
     message: str
     type: str = Field(..., description="success, warning, error, info")
@@ -63,20 +63,20 @@ class SystemAlert(BaseModel):
 
 
 class SystemAlertsResponse(BaseModel):
-    """시스템 알림 응답"""
+    """System alerts response"""
     alerts: List[SystemAlert]
     total: int
 
 
 class ClubStatistics(BaseModel):
-    """클럽 통계"""
+    """Club statistics"""
     active_clubs: int
     pending_approval: int
     total_subscribers: int
 
 
 class StudentStatistics(BaseModel):
-    """학생 사용자 통계"""
+    """Student user statistics"""
     total_users: int
     active_this_month: int
     new_this_week: int
@@ -84,7 +84,7 @@ class StudentStatistics(BaseModel):
 
 
 class StudentInfo(BaseModel):
-    """학생 사용자 정보"""
+    """Student user information"""
     uid: str
     display_name: Optional[str]
     email: str
@@ -93,33 +93,33 @@ class StudentInfo(BaseModel):
 
 
 class StudentsListResponse(BaseModel):
-    """학생 사용자 목록 응답"""
+    """Student user list response"""
     students: List[StudentInfo]
     total: int
 
 
 class ActivityChartData(BaseModel):
-    """활동 추이 차트 데이터"""
-    labels: List[str] = Field(..., description="날짜 레이블")
-    datasets: List[Dict[str, Any]] = Field(..., description="차트 데이터셋")
+    """Activity trend chart data"""
+    labels: List[str] = Field(..., description="Date labels")
+    datasets: List[Dict[str, Any]] = Field(..., description="Chart datasets")
 
 
 class AnalyticsOverview(BaseModel):
-    """플랫폼 분석 개요"""
+    """Platform analytics overview"""
     total_page_views: int
     club_profile_views: int
-    avg_engagement: float = Field(..., description="평균 참여율 (백분율)")
-    avg_session_time: float = Field(..., description="평균 세션 시간 (분)")
+    avg_engagement: float = Field(..., description="Average engagement rate (percentage)")
+    avg_session_time: float = Field(..., description="Average session time (minutes)")
 
 
 class TrafficChartData(BaseModel):
-    """트래픽 차트 데이터"""
+    """Traffic chart data"""
     labels: List[str]
     datasets: List[Dict[str, Any]]
 
 
 class PopularClub(BaseModel):
-    """인기 클럽"""
+    """Popular club"""
     rank: int
     club_id: str
     name: str
@@ -129,13 +129,13 @@ class PopularClub(BaseModel):
 
 
 class PopularClubsResponse(BaseModel):
-    """인기 클럽 목록"""
+    """Popular clubs list"""
     clubs: List[PopularClub]
     total: int
 
 
 class PlatformConfiguration(BaseModel):
-    """플랫폼 설정"""
+    """Platform configuration"""
     id: str
     title: str
     description: str
@@ -143,17 +143,17 @@ class PlatformConfiguration(BaseModel):
 
 
 class PlatformConfigurationsResponse(BaseModel):
-    """플랫폼 설정 목록"""
+    """Platform configurations list"""
     configurations: List[PlatformConfiguration]
 
 
 class ConfigurationUpdateRequest(BaseModel):
-    """설정 업데이트 요청"""
+    """Configuration update request"""
     enabled: bool
 
 
 class SystemInformation(BaseModel):
-    """시스템 정보"""
+    """System information"""
     version: str
     uptime: str
     database_size: str
@@ -163,7 +163,7 @@ class SystemInformation(BaseModel):
 
 
 class BackupResponse(BaseModel):
-    """백업 응답"""
+    """Backup response"""
     message: str
     backup_id: str
     timestamp: datetime
@@ -171,14 +171,14 @@ class BackupResponse(BaseModel):
 
 
 class CacheResponse(BaseModel):
-    """캐시 응답"""
+    """Cache response"""
     message: str
     cleared_items: int
     timestamp: datetime
 
 
 class ClubDetailedInfo(BaseModel):
-    """클럽 상세 정보 (SuperAdmin용)"""
+    """Club detailed information (SuperAdmin use)"""
     id: str
     name: str
     description: Optional[str]
@@ -194,7 +194,7 @@ class ClubDetailedInfo(BaseModel):
 
 
 class ClubListResponseDetailed(BaseModel):
-    """클럽 목록 응답 (SuperAdmin용)"""
+    """Club list response (SuperAdmin use)"""
     clubs: List[ClubDetailedInfo]
     total: int
     page: int
@@ -202,18 +202,18 @@ class ClubListResponseDetailed(BaseModel):
 
 
 class ClubCreateBySuperAdmin(BaseModel):
-    """클럽 생성 (SuperAdmin용)"""
+    """Club creation (SuperAdmin use)"""
     name: str = Field(..., min_length=1, max_length=200)
     description: str = Field(..., min_length=1)
     categories: List[str] = Field(..., min_items=1)
     activity_type: List[str]
-    leader_email: Optional[str] = Field(None, description="리더 이메일 (선택사항)")
+    leader_email: Optional[str] = Field(None, description="Leader email (optional)")
     contact_email: Optional[str] = None
     tagline: Optional[str] = None
 
 
 class ClubUpdateBySuperAdmin(BaseModel):
-    """클럽 수정 (SuperAdmin용)"""
+    """Club update (SuperAdmin use)"""
     name: Optional[str] = None
     description: Optional[str] = None
     categories: Optional[List[str]] = None

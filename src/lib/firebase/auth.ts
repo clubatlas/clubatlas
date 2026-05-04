@@ -1,5 +1,5 @@
 /**
- * Firebase 인증 관련 함수
+ * Firebase authentication functions
  */
 import {
   signInWithEmailAndPassword,
@@ -13,35 +13,35 @@ import {
 import { auth } from './config';
 
 /**
- * 이메일/비밀번호로 로그인
+ * Sign in with email/password
  */
 export async function signIn(email: string, password: string): Promise<UserCredential> {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
 /**
- * 이메일/비밀번호로 회원가입
+ * Sign up with email/password
  */
 export async function signUp(email: string, password: string): Promise<UserCredential> {
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
 /**
- * 로그아웃
+ * Sign out
  */
 export async function logout(): Promise<void> {
   return signOut(auth);
 }
 
 /**
- * 현재 사용자 가져오기
+ * Get current user
  */
 export function getCurrentUser(): User | null {
   return auth.currentUser;
 }
 
 /**
- * ID 토큰 가져오기 (API 요청 시 사용)
+ * Get ID token (for use in API requests)
  */
 export async function getIdToken(forceRefresh = false): Promise<string | null> {
   if (!auth) return null;
@@ -51,14 +51,14 @@ export async function getIdToken(forceRefresh = false): Promise<string | null> {
 }
 
 /**
- * 이메일 인증 메일 발송
+ * Send email verification
  */
 export async function sendVerificationEmail(user: User): Promise<void> {
   return sendEmailVerification(user);
 }
 
 /**
- * 인증 상태 변경 감지
+ * Listen for auth state changes
  */
 export function onAuthChange(callback: (user: User | null) => void): () => void {
   return onAuthStateChanged(auth, callback);

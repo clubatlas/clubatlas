@@ -22,7 +22,6 @@ interface RecentActivityProps {
 export default function RecentActivity({ subscribers, events, announcements }: RecentActivityProps) {
   const activities: Activity[] = [];
 
-  // 최근 구독자 추가
   subscribers.slice(0, 3).forEach(sub => {
     activities.push({
       title: 'New subscriber',
@@ -33,7 +32,6 @@ export default function RecentActivity({ subscribers, events, announcements }: R
     });
   });
 
-  // 최근 이벤트 추가
   events.slice(0, 2).forEach(event => {
     if (event.created_at) {
       activities.push({
@@ -46,7 +44,6 @@ export default function RecentActivity({ subscribers, events, announcements }: R
     }
   });
 
-  // 최근 공지사항 추가
   announcements.slice(0, 2).forEach(announcement => {
     if (announcement.created_at) {
       activities.push({
@@ -59,10 +56,8 @@ export default function RecentActivity({ subscribers, events, announcements }: R
     }
   });
 
-  // 시간순 정렬 (최신순)
   activities.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
 
-  // 최대 3개만 표시
   const displayActivities = activities.slice(0, 3);
 
   return (

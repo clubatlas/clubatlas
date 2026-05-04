@@ -1,5 +1,5 @@
 """
-Users API 엔드포인트
+Users API endpoints
 """
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from app.models.user import (
@@ -20,13 +20,13 @@ router = APIRouter(prefix="/api/users", tags=["users"])
 
 @router.get("/check-email")
 async def check_email_exists(
-    email: str = Query(..., description="확인할 이메일 주소"),
+    email: str = Query(..., description="Email address to check"),
     current_user: dict = Depends(get_current_user_optional)
 ):
     """
-    이메일로 사용자 계정 존재 여부 확인
-    - 존재하면 exists: true, role 반환
-    - 없으면 exists: false
+    Check whether a user account exists for the given email.
+    - Returns exists: true and role if found
+    - Returns exists: false if not found
     """
     users = await user_service.query_documents(
         user_service.COLLECTION,
@@ -44,23 +44,23 @@ async def create_or_update_profile(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    사용자 프로필 생성 또는 업데이트
-    
-    - 첫 로그인 시 프로필 생성
-    - 이미 존재하면 업데이트
+    Create or update user profile.
+
+    - Creates profile on first login
+    - Updates if profile already exists
     """
     uid = current_user['uid']
     email = current_user.get('email', '')
-    
+
     existing_profile = await user_service.get_user_profile(uid)
-    
+
     if existing_profile:
         updated_data = {}
         if profile_data.display_name:
             updated_data['display_name'] = profile_data.display_name
         if profile_data.interests:
             updated_data['interests'] = profile_data.interests
-        
+
         result = await user_service.update_document(
             user_service.COLLECTION,
             uid,
@@ -73,7 +73,7 @@ async def create_or_update_profile(
             display_name=profile_data.display_name,
             interests=profile_data.interests
         )
-    
+
     return UserProfileResponse(
         uid=result['id'],
         email=result['email'],
@@ -89,18 +89,18 @@ async def create_or_update_profile(
 @router.get("/profile", response_model=UserProfileResponse)
 async def get_my_profile(current_user: dict = Depends(get_current_user)):
     """
-    내 프로필 조회
+    Get my profile
     """
     uid = current_user['uid']
-    
+
     profile = await user_service.get_user_profile(uid)
-    
+
     if not profile:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found. Please create a profile first."
         )
-    
+
     display_name = profile.get('display_name') or ''
     stored_first = profile.get('first_name')
     stored_last = profile.get('last_name')
@@ -141,10 +141,10 @@ async def edit_profile(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    프로필 편집 (Edit Profile 모달)
+    Edit profile (Edit Profile modal)
 
-    - first_name, last_name, email, student_id 수정
-    - first_name/last_name 변경 시 display_name도 자동 업데이트
+    - Edit first_name, last_name, email, student_id
+    - Automatically updates display_name when first_name/last_name changes
     """
     uid = current_user['uid']
 
@@ -197,20 +197,20 @@ async def update_interests(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    사용자 관심사 업데이트
+    Update user interests
     """
     uid = current_user['uid']
-    
+
     profile = await user_service.get_user_profile(uid)
     if not profile:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found"
         )
-    
+
     if profile_update.interests is not None:
         await user_service.update_user_interests(uid, profile_update.interests)
-    
+
     return {"message": "Interests updated successfully"}
 
 
@@ -220,21 +220,21 @@ async def create_recommendation_preferences(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    AI 추천 선호도 저장 (AI 폼에서 수집한 3가지 정보)
-    
-    - preferred_categories: 관심있는 클럽 카테고리
-    - preferred_activity_types: 원하는 활동 유형
-    - available_time_slots: 활동 가능한 시간대
+    Save AI recommendation preferences (3 items collected from AI form)
+
+    - preferred_categories: Interested club categories
+    - preferred_activity_types: Desired activity types
+    - available_time_slots: Available time slots
     """
     uid = current_user['uid']
-    
+
     profile = await user_service.get_user_profile(uid)
     if not profile:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found. Please create a profile first."
         )
-    
+
     await user_service.update_recommendation_preferences(
         uid=uid,
         preferred_categories=preferences.preferred_categories,
@@ -242,7 +242,7 @@ async def create_recommendation_preferences(
         available_time_slots=preferences.available_time_slots,
         source='ai-form'
     )
-    
+
     return {
         "message": "Recommendation preferences saved successfully",
         "preferences": {
@@ -258,25 +258,25 @@ async def get_recommendation_preferences(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    저장된 추천 선호도 조회
+    Get saved recommendation preferences
     """
     uid = current_user['uid']
-    
+
     profile = await user_service.get_user_profile(uid)
     if not profile:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found"
         )
-    
+
     preferences = profile.get('recommendation_preferences')
-    
+
     if not preferences:
         return {
             "message": "No preferences found",
             "preferences": None
         }
-    
+
     return {
         "message": "Preferences retrieved successfully",
         "preferences": preferences
@@ -289,7 +289,7 @@ async def update_notification_preferences(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    사용자 알림 설정 업데이트
+    Update user notification preferences
     """
     uid = current_user['uid']
 
@@ -318,12 +318,12 @@ async def update_notification_preferences(
 @router.delete("/me", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_my_account(current_user: dict = Depends(get_current_user)):
     """
-    계정 삭제
+    Delete account
 
-    - Firestore 사용자 프로필 삭제
-    - 구독 데이터 삭제
-    - 북마크 데이터 삭제
-    - Firebase Auth 계정 삭제
+    - Delete Firestore user profile
+    - Delete subscription data
+    - Delete bookmark data
+    - Delete Firebase Auth account
     """
     uid = current_user['uid']
 
@@ -348,7 +348,7 @@ async def delete_my_account(current_user: dict = Depends(get_current_user)):
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"계정 삭제 중 오류가 발생했습니다: {str(e)}"
+            detail=f"An error occurred while deleting the account: {str(e)}"
         )
 
 
@@ -358,17 +358,17 @@ async def update_recommendation_preferences(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    추천 선호도 업데이트
+    Update recommendation preferences
     """
     uid = current_user['uid']
-    
+
     profile = await user_service.get_user_profile(uid)
     if not profile:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found"
         )
-    
+
     await user_service.update_recommendation_preferences(
         uid=uid,
         preferred_categories=preferences.preferred_categories,
@@ -376,9 +376,7 @@ async def update_recommendation_preferences(
         available_time_slots=preferences.available_time_slots,
         source='profile'
     )
-    
+
     return {
         "message": "Recommendation preferences updated successfully"
     }
-
-

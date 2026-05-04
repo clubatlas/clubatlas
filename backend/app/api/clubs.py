@@ -1,5 +1,5 @@
 """
-Clubs API 엔드포인트
+Clubs API endpoints
 """
 from typing import Optional, List
 from fastapi import APIRouter, Depends, HTTPException, status, Query
@@ -18,33 +18,33 @@ router = APIRouter(prefix="/api/clubs", tags=["clubs"])
 
 @router.get("", response_model=ClubListResponse)
 async def get_clubs(
-    categories: Optional[str] = Query(None, description="쉼표로 구분된 카테고리"),
-    activity_type: Optional[str] = Query(None, description="활동 유형"),
-    page: int = Query(1, ge=1, description="페이지 번호"),
-    page_size: int = Query(20, ge=1, le=1000, description="페이지 크기"),
+    categories: Optional[str] = Query(None, description="Comma-separated categories"),
+    activity_type: Optional[str] = Query(None, description="Activity type"),
+    page: int = Query(1, ge=1, description="Page number"),
+    page_size: int = Query(20, ge=1, le=1000, description="Page size"),
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    동아리 목록 조회
-    
-    - 필터링: 카테고리, 활동 유형
-    - 페이징 지원
-    - 인증 선택적 (로그인하지 않아도 조회 가능)
+    Get club list
+
+    - Filtering: categories, activity type
+    - Pagination support
+    - Authentication optional (accessible without login)
     """
     try:
         category_list = None
         if categories:
             category_list = [c.strip() for c in categories.split(',')]
-        
+
         offset = (page - 1) * page_size
-        
+
         clubs, total = await club_service.get_clubs(
             categories=category_list,
             activity_type=activity_type,
             limit=page_size,
             offset=offset
         )
-        
+
         club_objects = []
         for club_data in clubs:
             club_objects.append(Club(
@@ -68,7 +68,7 @@ async def get_clubs(
                 updated_at=club_data.get('updated_at'),
                 is_active=club_data.get('is_active', True)
             ))
-        
+
         return ClubListResponse(
             clubs=club_objects,
             total=total,
@@ -90,18 +90,18 @@ async def get_club(
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    동아리 상세 조회
-    
-    - 조회 시 view_count 증가
+    Get club detail
+
+    - Increments view_count on each request
     """
     club_data = await club_service.get_club(club_id)
-    
+
     if not club_data:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Club not found"
         )
-    
+
     await club_service.increment_view_count(club_id)
 
     try:
@@ -144,12 +144,12 @@ async def create_club(
     current_user: dict = Depends(require_admin)
 ):
     """
-    동아리 생성
-    
-    - 관리자 전용
+    Create a club
+
+    - Admin only
     """
     club_id = str(uuid.uuid4())
-    
+
     created_club = await club_service.create_club(
         club_id=club_id,
         name=club_data.name,
@@ -161,7 +161,7 @@ async def create_club(
         meeting_schedule=club_data.meeting_schedule.dict() if club_data.meeting_schedule else None,
         contact_email=club_data.contact_email
     )
-    
+
     return Club(
         id=created_club['id'],
         name=created_club['name'],
@@ -192,38 +192,37 @@ async def update_club(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    동아리 정보 수정
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리만 수정 가능
+    Update club information
+
+    - Club leader only
+    - Can only update clubs the leader manages
     """
     user_id = current_user['uid']
-    
+
     existing_club = await club_service.get_club(club_id)
-    
+
     if not existing_club:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Club not found"
         )
-    
-    # 권한 확인
+
     user_profile = await user_service.get_user_profile(user_id)
     managed_clubs = user_profile.get('managed_club_ids', [])
-    
+
     if club_id not in managed_clubs and current_user.get('role') != 'super-admin':
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You can only update clubs you manage"
         )
-    
+
     update_data = club_update.dict(exclude_unset=True)
-    
+
     if 'meeting_schedule' in update_data and update_data['meeting_schedule']:
         update_data['meeting_schedule'] = update_data['meeting_schedule']
-    
+
     updated_club = await club_service.update_club(club_id, update_data)
-    
+
     return Club(
         id=updated_club['id'],
         name=updated_club['name'],
@@ -252,32 +251,32 @@ async def get_my_managed_club(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    내가 관리하는 동아리 조회
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 첫 번째 동아리 반환
+    Get the club I manage
+
+    - Club leader only
+    - Returns the first club the leader manages
     """
     user_id = current_user['uid']
-    
+
     try:
         user_profile = await user_service.get_user_profile(user_id)
         managed_clubs = user_profile.get('managed_club_ids', [])
-        
+
         if not managed_clubs:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="No managed clubs found"
             )
-        
+
         club_id = managed_clubs[0]
         club_data = await club_service.get_club(club_id)
-        
+
         if not club_data:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Club not found"
             )
-        
+
         return Club(
             id=club_data['id'],
             name=club_data['name'],
@@ -315,20 +314,19 @@ async def get_club_stats(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    동아리 통계 조회
-    
-    - 리더가 자신의 동아리 통계 확인
+    Get club statistics
+
+    - Leader checks their own club stats
     """
     club_data = await club_service.get_club(club_id)
-    
+
     if not club_data:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Club not found"
         )
-    
+
     return {
         "club_id": club_id,
         "stats": club_data.get('stats', {})
     }
-

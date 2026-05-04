@@ -1,5 +1,5 @@
 """
-Events API 엔드포인트
+Events API endpoints
 """
 from typing import Optional, List
 from fastapi import APIRouter, Depends, HTTPException, status, Query
@@ -26,10 +26,10 @@ async def create_event(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    이벤트 생성
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 이벤트만 생성 가능
+    Create event
+
+    - Club leader only
+    - Can only create events for clubs you manage
     """
     user_id = current_user['uid']
     club_id = event_data.club_id
@@ -77,18 +77,18 @@ async def create_event(
 
 @router.get("", response_model=EventListResponse)
 async def get_events(
-    club_id: Optional[str] = Query(None, description="동아리 ID로 필터링"),
-    status_filter: Optional[str] = Query(None, description="상태로 필터링: active, cancelled, completed"),
-    start_date: Optional[str] = Query(None, description="시작 날짜 (ISO 8601)"),
-    end_date: Optional[str] = Query(None, description="종료 날짜 (ISO 8601)"),
-    limit: int = Query(50, ge=1, le=100, description="최대 개수"),
+    club_id: Optional[str] = Query(None, description="Filter by club ID"),
+    status_filter: Optional[str] = Query(None, description="Filter by status: active, cancelled, completed"),
+    start_date: Optional[str] = Query(None, description="Start date (ISO 8601)"),
+    end_date: Optional[str] = Query(None, description="End date (ISO 8601)"),
+    limit: int = Query(50, ge=1, le=100, description="Max count"),
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    이벤트 목록 조회
-    
-    - 필터링: club_id, status, 날짜 범위
-    - 인증 선택적
+    Get event list
+
+    - Filtering: club_id, status, date range
+    - Authentication optional
     """
     try:
         start_dt = datetime.fromisoformat(start_date) if start_date else None
@@ -122,15 +122,15 @@ async def get_events(
 
 @router.get("/my-calendar", response_model=EventListResponse)
 async def get_my_calendar_events(
-    start_date: Optional[str] = Query(None, description="시작 날짜 (ISO 8601)"),
-    end_date: Optional[str] = Query(None, description="종료 날짜 (ISO 8601)"),
+    start_date: Optional[str] = Query(None, description="Start date (ISO 8601)"),
+    end_date: Optional[str] = Query(None, description="End date (ISO 8601)"),
     current_user: dict = Depends(get_current_user)
 ):
     """
-    내 캘린더 이벤트 조회
-    
-    - 구독한 동아리의 이벤트 반환
-    - 관리하는 동아리의 이벤트 반환
+    Get my calendar events
+
+    - Returns events from subscribed clubs
+    - Returns events from managed clubs
     """
     user_id = current_user['uid']
     
@@ -196,11 +196,11 @@ async def get_my_attendance_history(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    내 이벤트 출석 이력 조회
+    Get my event attendance history
 
-    - 구독한 동아리의 과거 이벤트 기준
-    - 참석한 이벤트와 불참한 이벤트 구분
-    - 출석 통계 제공
+    - Based on past events of subscribed clubs
+    - Distinguishes attended and missed events
+    - Provides attendance statistics
     """
     user_id = current_user['uid']
 
@@ -305,9 +305,9 @@ async def get_event(
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    이벤트 상세 조회
-    
-    - 인증 선택적
+    Get event details
+
+    - Authentication optional
     """
     event_data = await event_service.get_event(event_id)
     
@@ -327,10 +327,10 @@ async def update_event(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    이벤트 수정
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 이벤트만 수정 가능
+    Update event
+
+    - Club leader only
+    - Can only modify events for clubs you manage
     """
     user_id = current_user['uid']
     
@@ -372,10 +372,10 @@ async def delete_event(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    이벤트 삭제 (soft delete - status를 cancelled로 변경)
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 이벤트만 삭제 가능
+    Delete event (soft delete - changes status to cancelled)
+
+    - Club leader only
+    - Can only delete events for clubs you manage
     """
     user_id = current_user['uid']
     
@@ -436,9 +436,9 @@ async def attend_event(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    이벤트 참석 등록
-    
-    - 인증된 사용자 전용
+    Register for event
+
+    - Authenticated users only
     """
     user_id = current_user['uid']
     
@@ -464,9 +464,9 @@ async def cancel_attendance(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    이벤트 참석 취소
-    
-    - 인증된 사용자 전용
+    Cancel event attendance
+
+    - Authenticated users only
     """
     user_id = current_user['uid']
     
@@ -492,10 +492,10 @@ async def send_event_reminder(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    이벤트 리마인더 발송
+    Send event reminder
 
-    - 이벤트 참석 예정자(attendees) + 클럽 구독자(subscribers) 전원에게 알림 생성
-    - 동아리 리더 전용
+    - Creates notifications for all event attendees + club subscribers
+    - Club leader only
     """
     user_id = current_user['uid']
 

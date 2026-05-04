@@ -1,5 +1,5 @@
 """
-Bookmark 데이터 모델
+Bookmark data models
 """
 from typing import Optional, List
 from datetime import datetime
@@ -7,20 +7,20 @@ from pydantic import BaseModel, Field
 
 
 class Bookmark(BaseModel):
-    """북마크 정보"""
+    """Bookmark information"""
     id: Optional[str] = None
-    user_id: str = Field(..., description="사용자 UID")
-    club_id: str = Field(..., description="동아리 ID")
+    user_id: str = Field(..., description="User UID")
+    club_id: str = Field(..., description="Club ID")
     created_at: Optional[datetime] = None
 
 
 class BookmarkCreate(BaseModel):
-    """북마크 생성 요청"""
+    """Bookmark creation request"""
     club_id: str
 
 
 class BookmarkedClub(BaseModel):
-    """북마크된 클럽 정보 (클럽 상세 포함)"""
+    """Bookmarked club information (includes club details)"""
     bookmark_id: str
     club_id: str
     club_name: str
@@ -35,6 +35,6 @@ class BookmarkedClub(BaseModel):
 
 
 class BookmarkListResponse(BaseModel):
-    """북마크 목록 응답"""
+    """Bookmark list response"""
     bookmarks: List[BookmarkedClub]
     total: int

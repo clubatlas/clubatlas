@@ -2,7 +2,6 @@
 
 import styles from './FilterSection.module.css';
 
-// chevron 아이콘은 CSS로 구현 (저장하지 못함)
 
 interface FilterSectionProps {
   selectedCategory: string;

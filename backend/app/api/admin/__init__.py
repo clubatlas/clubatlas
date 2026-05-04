@@ -1,3 +1,3 @@
 """
-Admin API 모듈
+Admin API module
 """

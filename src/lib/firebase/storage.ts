@@ -1,5 +1,5 @@
 /**
- * Firebase Storage 파일 업로드/다운로드
+ * Firebase Storage file upload/download
  */
 import {
   ref,
@@ -13,7 +13,7 @@ import {
 import { storage } from './config';
 
 /**
- * 파일 업로드 (바이트 단위)
+ * Upload file (bytes)
  */
 export async function uploadFile(
   path: string,
@@ -24,7 +24,7 @@ export async function uploadFile(
 }
 
 /**
- * 파일 업로드 (진행률 추적 가능)
+ * Upload file (with progress tracking)
  */
 export function uploadFileWithProgress(
   path: string,
@@ -35,7 +35,7 @@ export function uploadFileWithProgress(
 }
 
 /**
- * 파일 다운로드 URL 가져오기
+ * Get file download URL
  */
 export async function getFileUrl(path: string): Promise<string> {
   const storageRef = ref(storage, path);
@@ -43,7 +43,7 @@ export async function getFileUrl(path: string): Promise<string> {
 }
 
 /**
- * 파일 삭제
+ * Delete file
  */
 export async function deleteFile(path: string): Promise<void> {
   const storageRef = ref(storage, path);
@@ -51,7 +51,7 @@ export async function deleteFile(path: string): Promise<void> {
 }
 
 /**
- * 이미지 업로드 헬퍼 (File 객체용)
+ * Image upload helper (for File objects)
  */
 export async function uploadImage(
   path: string,

@@ -1,8 +1,8 @@
 """
-더미 데이터 생성 스크립트
-- 테스트용 동아리 데이터
-- 테스트용 사용자 및 선호도
-- 테스트용 사용자 활동 기록
+Dummy data creation script
+- Test club data
+- Test users and preferences
+- Test user activity records
 """
 import sys
 import os
@@ -15,13 +15,12 @@ from app.services.firestore_service import club_service, FirestoreService
 firestore_service = FirestoreService()
 
 
-# 더미 동아리 데이터
 DUMMY_CLUBS = [
     {
         "id": "club_tech_robotics",
         "name": "Robotics Club",
-        "description": "로봇 제작과 프로그래밍을 통해 기술을 배우고 대회에 참가합니다.",
-        "tagline": "미래를 만드는 로봇공학",
+        "description": "Learn technology and participate in competitions through robot building and programming.",
+        "tagline": "Robotics Engineering the Future",
         "categories": ["Technology", "Engineering", "STEM"],
         "tags": ["robotics", "programming", "competition", "arduino"],
         "activity_type": ["On-Campus"],
@@ -40,7 +39,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_robotics",
-                "name": "김로봇",
+                "name": "Kim Robot",
                 "role": "President",
                 "email": "robotics@university.edu"
             }
@@ -50,8 +49,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_arts_photography",
         "name": "Photography Club",
-        "description": "사진 촬영 기술을 배우고 전시회를 개최하며 예술적 감각을 키웁니다.",
-        "tagline": "순간을 포착하는 예술",
+        "description": "Learn photography skills, hold exhibitions, and develop artistic sensibility.",
+        "tagline": "The Art of Capturing Moments",
         "categories": ["Arts", "Creative", "Visual Arts"],
         "tags": ["photography", "exhibition", "camera", "art"],
         "activity_type": ["Hybrid", "Off-Campus"],
@@ -65,7 +64,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_photo",
-                "name": "이사진",
+                "name": "Lee Photo",
                 "role": "President",
                 "email": "photo@university.edu"
             }
@@ -75,8 +74,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_science_astronomy",
         "name": "Astronomy Club",
-        "description": "천체 관측과 우주 과학을 공부하며 밤하늘의 신비를 탐험합니다.",
-        "tagline": "별을 관찰하는 과학자들",
+        "description": "Explore the mysteries of the night sky by studying celestial observation and space science.",
+        "tagline": "Scientists Observing the Stars",
         "categories": ["Science", "STEM", "Nature"],
         "tags": ["astronomy", "telescope", "space", "observation"],
         "activity_type": ["Off-Campus"],
@@ -90,7 +89,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_astro",
-                "name": "박별",
+                "name": "Park Star",
                 "role": "President",
                 "email": "astro@university.edu"
             }
@@ -100,8 +99,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_tech_ai",
         "name": "AI & Machine Learning Club",
-        "description": "인공지능과 머신러닝을 학습하고 프로젝트를 진행합니다.",
-        "tagline": "AI로 미래를 설계하다",
+        "description": "Study artificial intelligence and machine learning and work on projects.",
+        "tagline": "Designing the Future with AI",
         "categories": ["Technology", "Computer Science", "STEM"],
         "tags": ["ai", "machine-learning", "python", "deep-learning"],
         "activity_type": ["Online"],
@@ -120,7 +119,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_ai",
-                "name": "최인공",
+                "name": "Choi AI",
                 "role": "President",
                 "email": "ai@university.edu"
             }
@@ -130,8 +129,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_sports_soccer",
         "name": "Soccer Club",
-        "description": "축구를 통해 건강과 팀워크를 키우며 리그전에 참가합니다.",
-        "tagline": "열정과 협동의 그라운드",
+        "description": "Build health and teamwork through soccer and participate in league matches.",
+        "tagline": "A Field of Passion and Collaboration",
         "categories": ["Sports", "Recreation", "Team Sports"],
         "tags": ["soccer", "football", "sports", "teamwork"],
         "activity_type": ["On-Campus"],
@@ -150,7 +149,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_soccer",
-                "name": "정축구",
+                "name": "Jung Soccer",
                 "role": "Captain",
                 "email": "soccer@university.edu"
             }
@@ -160,8 +159,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_music_band",
         "name": "University Band",
-        "description": "다양한 악기를 연주하며 공연을 준비하고 음악적 재능을 발전시킵니다.",
-        "tagline": "하모니를 만드는 음악가들",
+        "description": "Play various instruments, prepare for performances, and develop musical talent.",
+        "tagline": "Musicians Creating Harmony",
         "categories": ["Arts", "Music", "Performance"],
         "tags": ["music", "band", "performance", "instruments"],
         "activity_type": ["On-Campus"],
@@ -180,7 +179,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_band",
-                "name": "강음악",
+                "name": "Kang Music",
                 "role": "Director",
                 "email": "band@university.edu"
             }
@@ -190,8 +189,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_business_entrepreneurship",
         "name": "Entrepreneurship Club",
-        "description": "창업 아이디어를 개발하고 비즈니스 스킬을 배우며 스타트업 문화를 경험합니다.",
-        "tagline": "미래의 기업가를 위한 공간",
+        "description": "Develop startup ideas, learn business skills, and experience startup culture.",
+        "tagline": "A Space for Future Entrepreneurs",
         "categories": ["Business", "Innovation", "Leadership"],
         "tags": ["startup", "entrepreneurship", "business", "innovation"],
         "activity_type": ["Hybrid", "Online"],
@@ -205,7 +204,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_entrepreneur",
-                "name": "윤창업",
+                "name": "Yun Startup",
                 "role": "President",
                 "email": "entrepreneur@university.edu"
             }
@@ -215,8 +214,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_science_chemistry",
         "name": "Chemistry Research Club",
-        "description": "화학 실험과 연구를 통해 과학적 사고력을 키우고 학술대회에 참가합니다.",
-        "tagline": "실험실에서 발견하는 과학",
+        "description": "Develop scientific thinking through chemistry experiments and research, and participate in academic conferences.",
+        "tagline": "Science Discovered in the Lab",
         "categories": ["Science", "Research", "STEM"],
         "tags": ["chemistry", "research", "lab", "experiment"],
         "activity_type": ["On-Campus"],
@@ -230,7 +229,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_chem",
-                "name": "한화학",
+                "name": "Han Chemistry",
                 "role": "President",
                 "email": "chemistry@university.edu"
             }
@@ -240,8 +239,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_culture_debate",
         "name": "Debate Club",
-        "description": "토론 능력과 논리적 사고를 개발하며 전국 토론대회에 참가합니다.",
-        "tagline": "논리로 승부하는 토론의 장",
+        "description": "Develop debating skills and logical thinking, and participate in national debate competitions.",
+        "tagline": "The Arena of Logical Debate",
         "categories": ["Academic", "Communication", "Leadership"],
         "tags": ["debate", "public-speaking", "argumentation", "competition"],
         "activity_type": ["On-Campus"],
@@ -255,7 +254,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_debate",
-                "name": "서토론",
+                "name": "Seo Debate",
                 "role": "President",
                 "email": "debate@university.edu"
             }
@@ -265,8 +264,8 @@ DUMMY_CLUBS = [
     {
         "id": "club_tech_web",
         "name": "Web Development Club",
-        "description": "웹 개발 기술을 배우고 실제 프로젝트를 진행하며 포트폴리오를 구축합니다.",
-        "tagline": "웹으로 세상을 연결하다",
+        "description": "Learn web development skills, work on real projects, and build a portfolio.",
+        "tagline": "Connecting the World Through the Web",
         "categories": ["Technology", "Computer Science", "Design"],
         "tags": ["web-dev", "html", "css", "javascript", "react"],
         "activity_type": ["Online", "Hybrid"],
@@ -280,7 +279,7 @@ DUMMY_CLUBS = [
         "leaders": [
             {
                 "uid": "leader_webdev",
-                "name": "임웹",
+                "name": "Im Web",
                 "role": "President",
                 "email": "webdev@university.edu"
             }
@@ -290,12 +289,11 @@ DUMMY_CLUBS = [
 ]
 
 
-# 더미 사용자 데이터
 DUMMY_USERS = [
     {
         "uid": "test_user_tech_lover",
         "email": "techstudent@test.com",
-        "display_name": "테크 러버",
+        "display_name": "Tech Lover",
         "role": "student",
         "interests": ["coding", "robotics", "ai"],
         "recommendation_preferences": {
@@ -309,7 +307,7 @@ DUMMY_USERS = [
     {
         "uid": "test_user_arts_enthusiast",
         "email": "artstudent@test.com",
-        "display_name": "예술가 지망생",
+        "display_name": "Aspiring Artist",
         "role": "student",
         "interests": ["photography", "music", "design"],
         "recommendation_preferences": {
@@ -323,7 +321,7 @@ DUMMY_USERS = [
     {
         "uid": "test_user_science_geek",
         "email": "sciencestudent@test.com",
-        "display_name": "과학 덕후",
+        "display_name": "Science Geek",
         "role": "student",
         "interests": ["astronomy", "chemistry", "research"],
         "recommendation_preferences": {
@@ -337,9 +335,8 @@ DUMMY_USERS = [
 ]
 
 
-# 더미 사용자 활동 데이터
 DUMMY_ACTIVITIES = [
-    # test_user_tech_lover의 활동
+    # test_user_tech_lover activities
     {
         "user_id": "test_user_tech_lover",
         "activity_type": "view_club",
@@ -364,7 +361,7 @@ DUMMY_ACTIVITIES = [
         "club_id": "club_tech_web",
         "metadata": {}
     },
-    # test_user_arts_enthusiast의 활동
+    # test_user_arts_enthusiast activities
     {
         "user_id": "test_user_arts_enthusiast",
         "activity_type": "view_club",
@@ -383,7 +380,7 @@ DUMMY_ACTIVITIES = [
         "club_id": "club_music_band",
         "metadata": {"duration": 90}
     },
-    # test_user_science_geek의 활동
+    # test_user_science_geek activities
     {
         "user_id": "test_user_science_geek",
         "activity_type": "view_club",
@@ -412,10 +409,10 @@ DUMMY_ACTIVITIES = [
 
 
 async def create_clubs():
-    """동아리 데이터 생성"""
-    print("\n🏫 동아리 데이터 생성 중...")
+    """Create club data"""
+    print("\n🏫 Creating club data...")
     created_count = 0
-    
+
     for club_data in DUMMY_CLUBS:
         try:
             club_id = club_data.pop('id')
@@ -432,18 +429,18 @@ async def create_clubs():
                 contact_email=club_data.get('contact_email')
             )
             created_count += 1
-            print(f"  ✅ {club_data['name']} 생성 완료")
+            print(f"  ✅ {club_data['name']} created")
         except Exception as e:
-            print(f"  ❌ {club_data['name']} 생성 실패: {str(e)}")
-    
-    print(f"\n✅ 총 {created_count}개 동아리 생성 완료!")
+            print(f"  ❌ {club_data['name']} creation failed: {str(e)}")
+
+    print(f"\n✅ Total {created_count} clubs created!")
 
 
 async def create_users():
-    """사용자 데이터 생성"""
-    print("\n👤 사용자 데이터 생성 중...")
+    """Create user data"""
+    print("\n👤 Creating user data...")
     created_count = 0
-    
+
     for user_data in DUMMY_USERS:
         try:
             await firestore_service.create_document(
@@ -452,18 +449,18 @@ async def create_users():
                 user_data
             )
             created_count += 1
-            print(f"  ✅ {user_data['display_name']} ({user_data['uid']}) 생성 완료")
+            print(f"  ✅ {user_data['display_name']} ({user_data['uid']}) created")
         except Exception as e:
-            print(f"  ❌ {user_data['display_name']} 생성 실패: {str(e)}")
-    
-    print(f"\n✅ 총 {created_count}명 사용자 생성 완료!")
+            print(f"  ❌ {user_data['display_name']} creation failed: {str(e)}")
+
+    print(f"\n✅ Total {created_count} users created!")
 
 
 async def create_activities():
-    """사용자 활동 데이터 생성"""
-    print("\n📊 사용자 활동 데이터 생성 중...")
+    """Create user activity data"""
+    print("\n📊 Creating user activity data...")
     created_count = 0
-    
+
     for activity_data in DUMMY_ACTIVITIES:
         try:
             activity_id = f"{activity_data['user_id']}_{activity_data['club_id']}_{created_count}"
@@ -473,47 +470,40 @@ async def create_activities():
                 activity_data
             )
             created_count += 1
-            print(f"  ✅ 활동 기록 생성: {activity_data['user_id']} -> {activity_data['activity_type']}")
+            print(f"  ✅ Activity record created: {activity_data['user_id']} -> {activity_data['activity_type']}")
         except Exception as e:
-            print(f"  ❌ 활동 기록 생성 실패: {str(e)}")
-    
-    print(f"\n✅ 총 {created_count}개 활동 기록 생성 완료!")
+            print(f"  ❌ Activity record creation failed: {str(e)}")
+
+    print(f"\n✅ Total {created_count} activity records created!")
 
 
 async def main():
-    """메인 실행 함수"""
+    """Main execution function"""
     print("=" * 60)
-    print("🎯 ClubAtlas 더미 데이터 생성 스크립트")
+    print("🎯 ClubAtlas Dummy Data Creation Script")
     print("=" * 60)
-    
+
     try:
-        # 1. 동아리 데이터 생성
         await create_clubs()
-        
-        # 2. 사용자 데이터 생성
         await create_users()
-        
-        # 3. 사용자 활동 데이터 생성
         await create_activities()
-        
+
         print("\n" + "=" * 60)
-        print("✅ 모든 더미 데이터 생성 완료!")
+        print("✅ All dummy data creation complete!")
         print("=" * 60)
-        print("\n📝 생성된 데이터:")
-        print(f"  - 동아리: {len(DUMMY_CLUBS)}개")
-        print(f"  - 사용자: {len(DUMMY_USERS)}명")
-        print(f"  - 활동 기록: {len(DUMMY_ACTIVITIES)}개")
-        print("\n🔍 테스트 계정:")
+        print("\n📝 Created data:")
+        print(f"  - Clubs: {len(DUMMY_CLUBS)}")
+        print(f"  - Users: {len(DUMMY_USERS)}")
+        print(f"  - Activity records: {len(DUMMY_ACTIVITIES)}")
+        print("\n🔍 Test accounts:")
         for user in DUMMY_USERS:
             print(f"  - {user['display_name']}: {user['uid']}")
-        
+
     except Exception as e:
-        print(f"\n❌ 오류 발생: {str(e)}")
+        print(f"\n❌ Error occurred: {str(e)}")
         import traceback
         traceback.print_exc()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-

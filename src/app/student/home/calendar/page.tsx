@@ -12,7 +12,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { getMyCalendarEvents, Event as ApiEvent } from '@/lib/api';
 import { getClub } from '@/lib/api/clubs';
 
-// 로컬 아이콘 경로
 const viewModeIcon = "/images/icons/calendar/view-mode.svg";
 const monthViewIcon = "/images/icons/calendar/month-view.svg";
 const weekViewIcon = "/images/icons/calendar/week-view.svg";

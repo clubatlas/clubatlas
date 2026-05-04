@@ -32,17 +32,13 @@ export default function AdminLoginForm({ role, onRoleChange }: AdminLoginFormPro
     setLoading(true);
     
     try {
-      // Firebase 로그인
       const userCredential = await signIn(email, password);
-      
-      // 사용자 프로필 새로고침
+
       await refreshUserProfile();
-      
-      // ID 토큰 가져오기
+
       const token = await userCredential.user.getIdTokenResult();
       const userRole = token.claims.role as string | undefined;
-      
-      // 역할 확인
+
       if (role === 'super-admin') {
         if (userRole !== 'super-admin') {
           setError('You do not have Super Admin privileges. Please check your role.');
@@ -51,14 +47,12 @@ export default function AdminLoginForm({ role, onRoleChange }: AdminLoginFormPro
         }
         router.push('/superadmin/dashboard');
       } else {
-        // club-leader 또는 admin
         if (userRole !== 'club-leader' && userRole !== 'admin' && userRole !== 'super-admin') {
           setError('You do not have Club Leader privileges. Please request access.');
           setLoading(false);
           return;
         }
-        
-        // Super Admin은 admin 대시보드에도 접근 가능
+
         if (userRole === 'super-admin') {
           router.push('/superadmin/dashboard');
         } else {
@@ -67,8 +61,7 @@ export default function AdminLoginForm({ role, onRoleChange }: AdminLoginFormPro
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      
-      // Firebase 에러 메시지 처리
+
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
         setError('Invalid email or password.');
       } else if (err.code === 'auth/user-not-found') {
@@ -95,7 +88,6 @@ export default function AdminLoginForm({ role, onRoleChange }: AdminLoginFormPro
         </p>
       </div>
 
-      {/* 역할 선택 버튼 */}
       <div className={styles.roleSelectorWrapper}>
       <div className={styles.roleSelector}>
         <button

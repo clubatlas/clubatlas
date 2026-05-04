@@ -16,7 +16,6 @@ import { logout } from '@/lib/firebase/auth';
 import EditProfileModal from '@/components/EditProfileModal';
 import ChangePasswordModal from '@/components/ChangePasswordModal';
 
-// 로컬 아이콘 및 이미지 경로
 const overviewIcon = "/images/icons/mypage/overview.svg";
 const subscribeIcon = "/images/icons/mypage/subscribed.svg";
 const historyIcon = "/images/icons/mypage/history.svg";
@@ -31,30 +30,24 @@ const clockIcon = "/images/icons/mypage/calendar-small.svg";
 const heartIcon = "/images/icons/mypage/bookmark.svg";
 const heartIconFilled = "/images/icons/mypage/bookmark-filled.svg";
 
-// Subscribed 탭 아이콘
 const checkIcon = "/images/icons/mypage/check-circle.svg";
 const notificationIcon = "/images/icons/mypage/notification.svg";
 
-// History 탭 아이콘
 const eventsAttendedIconGreen = "/images/icons/mypage/events-attended-green.svg";
 const eventsMissedIconRed = "/images/icons/mypage/events-missed-red.svg";
 const attendanceRateIconBlue = "/images/icons/mypage/attendance-rate-blue.svg";
 const eventCheckIcon = "/images/icons/mypage/event-check.svg";
 const eventXIcon = "/images/icons/mypage/event-x.svg";
 
-// Saved 탭 아이콘 및 이미지
 const removeIcon = "/images/icons/mypage/remove.svg";
 const computerScienceImage = "/images/default-club.svg";
 
-// Settings 탭 아이콘
 const passwordIcon = "/images/icons/mypage/password.svg";
 
-// 클럽 이미지 (Overview 탭용)
 const roboticsImage = "https://www.figma.com/api/mcp/asset/4ba38dbe-026b-4fd0-bc00-b3d0131f693c";
 const photographyImage = "https://www.figma.com/api/mcp/asset/a186a9fb-03e2-4ba0-aa24-2ce436bc6074";
 const debateImage = "https://www.figma.com/api/mcp/asset/8e892fbd-ccf1-4c07-b2a8-e86e1e877f61";
 
-// 클럽 이미지 (Subscribed 탭용 - 더 큰 사이즈)
 const roboticsImageLarge = "https://www.figma.com/api/mcp/asset/2ea62fac-3b99-4b23-8a29-b749e4db2b63";
 const photographyImageLarge = "https://www.figma.com/api/mcp/asset/cad04e6a-4e92-4d32-a266-af8cb40da6b0";
 const debateImageLarge = "https://www.figma.com/api/mcp/asset/21474162-77bc-4f7c-90a2-637ab7563087";

@@ -22,7 +22,6 @@
   flex-direction: column;
 }
 
-/* 이미지 헤더 */
 .imageHeader {
   position: relative;
   height: 192px;
@@ -88,7 +87,6 @@
   z-index: 2;
 }
 
-/* 콘텐츠 섹션 */
 .contentSection {
   padding: 32px;
 }
@@ -115,7 +113,6 @@
   text-align: left;
 }
 
-/* 이벤트 정보 */
 .infoSection {
   display: flex;
   flex-direction: column;
@@ -308,7 +305,6 @@
   margin-left: 8px;
 }
 
-/* 저장 알림 */
 .savedNotification {
   margin-top: 16px;
   background: linear-gradient(to right, #f0fdf4 0%, #ecfdf5 100%);
@@ -332,7 +328,6 @@
   line-height: 20px;
 }
 
-/* 액션 버튼 */
 .actionButtons {
   display: flex;
   gap: 12px;

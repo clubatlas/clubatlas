@@ -1,5 +1,5 @@
 /**
- * Firebase 통합 export
+ * Firebase unified exports
  */
 export * from './config';
 export * from './auth';

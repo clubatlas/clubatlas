@@ -25,17 +25,13 @@ export default function LoginForm() {
     setLoading(true);
     
     try {
-      // Firebase 로그인
       const userCredential = await signIn(email, password);
-      
-      // 사용자 프로필 새로고침
+
       await refreshUserProfile();
-      
-      // ID 토큰 가져오기
+
       const token = await userCredential.user.getIdTokenResult();
       const role = token.claims.role as string | undefined;
 
-      // student 롤이고 이메일 미인증 시 로그인 차단
       if (role === 'student' && !userCredential.user.emailVerified) {
         await logout();
         setError('Email verification required. Please check your verification email. (Valid for 1 hour)');
@@ -43,7 +39,6 @@ export default function LoginForm() {
         return;
       }
 
-      // 역할에 따라 리다이렉트
       if (role === 'super-admin') {
         router.push('/superadmin/dashboard');
       } else if (role === 'club-leader' || role === 'admin') {
@@ -53,8 +48,7 @@ export default function LoginForm() {
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      
-      // Firebase 에러 메시지 처리
+
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
         setError('Invalid email or password.');
       } else if (err.code === 'auth/user-not-found') {

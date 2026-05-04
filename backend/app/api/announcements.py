@@ -1,5 +1,5 @@
 """
-Announcements API 엔드포인트
+Announcements API endpoints
 """
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status, Query
@@ -22,10 +22,10 @@ async def create_announcement(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    공지사항 생성
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 공지사항만 생성 가능
+    Create an announcement
+
+    - Club leader only
+    - Can only create announcements for clubs the leader manages
     """
     user_id = current_user['uid']
     club_id = announcement_data.club_id
@@ -72,16 +72,16 @@ async def create_announcement(
 
 @router.get("", response_model=AnnouncementListResponse)
 async def get_announcements(
-    club_id: Optional[str] = Query(None, description="동아리 ID로 필터링"),
-    status_filter: Optional[str] = Query(None, description="상태로 필터링: active, archived"),
-    limit: int = Query(50, ge=1, le=100, description="최대 개수"),
+    club_id: Optional[str] = Query(None, description="Filter by club ID"),
+    status_filter: Optional[str] = Query(None, description="Filter by status: active, archived"),
+    limit: int = Query(50, ge=1, le=100, description="Maximum number of results"),
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    공지사항 목록 조회
-    
-    - 필터링: club_id, status
-    - 인증 선택적
+    Get announcement list
+
+    - Filtering: club_id, status
+    - Authentication optional
     """
     try:
         announcements = await announcement_service.get_announcements(
@@ -109,10 +109,10 @@ async def get_announcement(
     current_user: Optional[dict] = Depends(get_current_user_optional)
 ):
     """
-    공지사항 상세 조회
-    
-    - 인증 선택적
-    - 조회 시 opens 카운트 증가
+    Get announcement detail
+
+    - Authentication optional
+    - Increments opens count on each request
     """
     announcement_data = await announcement_service.get_announcement(announcement_id)
     
@@ -138,10 +138,10 @@ async def update_announcement(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    공지사항 수정
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 공지사항만 수정 가능
+    Update an announcement
+
+    - Club leader only
+    - Can only update announcements for clubs the leader manages
     """
     user_id = current_user['uid']
     
@@ -183,10 +183,10 @@ async def delete_announcement(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    공지사항 삭제 (soft delete - status를 archived로 변경)
-    
-    - 동아리 리더 전용
-    - 자신이 관리하는 동아리의 공지사항만 삭제 가능
+    Delete an announcement (soft delete - sets status to archived)
+
+    - Club leader only
+    - Can only delete announcements for clubs the leader manages
     """
     user_id = current_user['uid']
     

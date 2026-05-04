@@ -1,5 +1,5 @@
 """
-Analytics API - 월별/시계열 통계
+Analytics API - monthly / time-series statistics
 """
 from datetime import datetime
 from typing import Optional
@@ -18,14 +18,13 @@ class AnalyticsTrendsResponse(BaseModel):
 
 
 def _to_datetime(val) -> Optional[datetime]:
-    """Firestore timestamp/datetime을 naive UTC datetime으로 변환"""
+    """Convert Firestore timestamp/datetime to naive UTC datetime"""
     if val is None:
         return None
     if hasattr(val, "seconds") and not isinstance(val, datetime):
         return datetime.utcfromtimestamp(val.seconds + getattr(val, "nanoseconds", 0) / 1e9)
     if isinstance(val, datetime):
         if val.tzinfo is not None:
-            # timezone-aware → naive UTC
             import calendar
             return datetime.utcfromtimestamp(calendar.timegm(val.utctimetuple()))
         return val
@@ -42,11 +41,11 @@ def _to_datetime(val) -> Optional[datetime]:
 @router.get("/clubs/{club_id}/trends", response_model=AnalyticsTrendsResponse)
 async def get_club_analytics_trends(
     club_id: str,
-    months: int = Query(6, ge=1, le=12, description="조회할 월 수"),
+    months: int = Query(6, ge=1, le=12, description="Number of months to query"),
     current_user: dict = Depends(require_club_leader),
 ):
     """
-    동아리 월별 구독자 통계 - 구독한 월 기준 비누적 집계
+    Monthly subscriber statistics for a club - non-cumulative by subscription month
     """
     user_id = current_user["uid"]
     user_profile = await user_service.get_user_profile(user_id)

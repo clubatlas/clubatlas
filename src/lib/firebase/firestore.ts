@@ -1,5 +1,5 @@
 /**
- * Firestore 데이터베이스 접근 함수
+ * Firestore database access functions
  */
 import {
   collection,
@@ -20,7 +20,7 @@ import {
 import { firestore } from './config';
 
 /**
- * 문서 가져오기
+ * Get document
  */
 export async function getDocument<T = DocumentData>(
   collectionPath: string,
@@ -36,7 +36,7 @@ export async function getDocument<T = DocumentData>(
 }
 
 /**
- * 컬렉션의 모든 문서 가져오기
+ * Get all documents in a collection
  */
 export async function getCollection<T = DocumentData>(
   collectionPath: string,
@@ -55,7 +55,7 @@ export async function getCollection<T = DocumentData>(
 }
 
 /**
- * 문서 생성 또는 업데이트
+ * Create or update document
  */
 export async function setDocument(
   collectionPath: string,
@@ -70,7 +70,7 @@ export async function setDocument(
 }
 
 /**
- * 문서 업데이트
+ * Update document
  */
 export async function updateDocument(
   collectionPath: string,
@@ -85,7 +85,7 @@ export async function updateDocument(
 }
 
 /**
- * 문서 삭제
+ * Delete document
  */
 export async function deleteDocument(
   collectionPath: string,
@@ -96,7 +96,7 @@ export async function deleteDocument(
 }
 
 /**
- * 쿼리 헬퍼 함수들
+ * Query helper functions
  */
 export const firestoreQuery = {
   where,

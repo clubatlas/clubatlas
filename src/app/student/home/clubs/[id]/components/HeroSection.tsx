@@ -2,7 +2,7 @@
 
 import styles from './HeroSection.module.css';
 
-const roboticsImage = "https://www.figma.com/api/mcp/asset/f19d250f-4777-4e93-a829-b8d8a3fb9731"; // 클럽 썸네일 이미지
+const roboticsImage = "https://www.figma.com/api/mcp/asset/f19d250f-4777-4e93-a829-b8d8a3fb9731";
 const heartIcon = "/images/icons/clubs/heart.svg";
 
 interface HeroSectionProps {

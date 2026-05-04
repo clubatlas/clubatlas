@@ -7,8 +7,7 @@ import { getClub, Club } from '@/lib/api/clubs';
 import styles from './CreateEventModal.module.css';
 import DatePicker from './DatePicker';
 
-// 로컬 아이콘 경로
-const modalIconPlus = "/images/icons/calendar/create.svg"; // Create 아이콘 재사용
+const modalIconPlus = "/images/icons/calendar/create.svg";
 const closeIcon = "/images/icons/calendar/close.svg";
 const calendarIconDate = "/images/icons/calendar/calendar-date.svg";
 const locationIcon = "/images/icons/calendar/location.svg";

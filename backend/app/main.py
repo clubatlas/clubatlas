@@ -41,7 +41,7 @@ app.include_router(api_router)
 
 @app.get("/")
 async def root():
-    """API 상태 확인"""
+    """API status check"""
     return {
         "message": "ClubAtlas API",
         "status": "running",
@@ -52,7 +52,7 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """헬스체크 엔드포인트"""
+    """Health check endpoint"""
     return {
         "status": "healthy",
         "service": "ClubAtlas API"

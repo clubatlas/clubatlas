@@ -1,5 +1,5 @@
 /**
- * Clubs API 클라이언트
+ * Clubs API client
  */
 import { apiClient, ApiResponse } from './client';
 

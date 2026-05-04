@@ -9,7 +9,7 @@ import { subscribeToClub, unsubscribeFromClub, checkSubscription } from '@/lib/a
 
 const closeIcon = "/images/icons/calendar/close.svg";
 const clockIcon = "/images/icons/calendar/clock.svg";
-const locationIcon = "/images/icons/calendar/location2.svg"; // EventDetailModal 전용
+const locationIcon = "/images/icons/calendar/location2.svg";
 const usersIcon = "/images/icons/calendar/users.svg";
 const attendanceIcon = "/images/icons/calendar/attendance.svg";
 const bellIcon = "/images/icons/calendar/bell.svg";
@@ -111,7 +111,6 @@ export default function EventDetailModal({ onClose, event }: EventDetailModalPro
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        {/* 이미지 헤더 */}
         <div className={styles.imageHeader}>
           {(event.banner_url || event.logo_url) && (
             <img
@@ -130,9 +129,7 @@ export default function EventDetailModal({ onClose, event }: EventDetailModalPro
           </div>
         </div>
 
-        {/* 콘텐츠 */}
         <div className={styles.contentSection}>
-          {/* 제목 */}
           <h1 className={styles.eventTitle}>{event.title}</h1>
           {event.club_name && (
             <button
@@ -143,7 +140,6 @@ export default function EventDetailModal({ onClose, event }: EventDetailModalPro
             </button>
           )}
 
-          {/* 이벤트 정보 */}
           <div className={styles.infoSection}>
             <div className={styles.infoItem}>
               <div className={styles.infoIcon} style={{ background: 'linear-gradient(135deg, #ffe2e2 0%, #ffedd4 100%)' }}>
@@ -256,7 +252,6 @@ export default function EventDetailModal({ onClose, event }: EventDetailModalPro
               </label>
             </div>
 
-            {/* 저장 알림 */}
             {showSavedNotification && (
               <div className={styles.savedNotification}>
                 <span className={styles.checkIcon}>✓</span>
@@ -265,7 +260,6 @@ export default function EventDetailModal({ onClose, event }: EventDetailModalPro
             )}
           </div>
 
-          {/* 액션 버튼 */}
           <div className={styles.actionButtons}>
             <button
               className={styles.subscribeButton}

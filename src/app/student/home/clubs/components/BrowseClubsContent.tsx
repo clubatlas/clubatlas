@@ -6,7 +6,6 @@ import ClubCard from './ClubCard';
 import SearchBar from './SearchBar';
 import FilterSection from './FilterSection';
 
-// 클럽 이미지는 Figma 에셋 그대로 사용 (썸네일 이미지)
 const roboticsImage = "https://www.figma.com/api/mcp/asset/f19d250f-4777-4e93-a829-b8d8a3fb9731";
 const photographyImage = "https://www.figma.com/api/mcp/asset/26c28010-3be4-4f44-9eec-b41bdbe5107b";
 const dramaImage = "https://www.figma.com/api/mcp/asset/ee5859ec-9a0c-4ae8-9d13-b762ad52e5a9";

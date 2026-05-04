@@ -4,10 +4,6 @@ import { useState } from 'react';
 import { checkHealth, getApiStatus } from '@/lib/api';
 import styles from './ApiTest.module.css';
 
-/**
- * API 연결 테스트 컴포넌트 (개발용)
- * Welcome 페이지에서 백엔드 API 연결을 테스트할 수 있습니다.
- */
 export default function ApiTest() {
   const [healthStatus, setHealthStatus] = useState<string>('');
   const [apiStatus, setApiStatus] = useState<string>('');
@@ -15,45 +11,45 @@ export default function ApiTest() {
 
   const testHealth = async () => {
     setLoading(true);
-    setHealthStatus('테스트 중...');
+    setHealthStatus('Testing...');
     const response = await checkHealth();
     if (response.error) {
-      setHealthStatus(`❌ 오류: ${response.error}`);
+      setHealthStatus(`❌ Error: ${response.error}`);
     } else {
-      setHealthStatus(`✅ 성공: ${JSON.stringify(response.data)}`);
+      setHealthStatus(`✅ Success: ${JSON.stringify(response.data)}`);
     }
     setLoading(false);
   };
 
   const testApiStatus = async () => {
     setLoading(true);
-    setApiStatus('테스트 중...');
+    setApiStatus('Testing...');
     const response = await getApiStatus();
     if (response.error) {
-      setApiStatus(`❌ 오류: ${response.error}`);
+      setApiStatus(`❌ Error: ${response.error}`);
     } else {
-      setApiStatus(`✅ 성공: ${JSON.stringify(response.data)}`);
+      setApiStatus(`✅ Success: ${JSON.stringify(response.data)}`);
     }
     setLoading(false);
   };
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>API 연결 테스트</h3>
+      <h3 className={styles.title}>API Connection Test</h3>
       <div className={styles.buttons}>
-        <button 
-          onClick={testHealth} 
+        <button
+          onClick={testHealth}
           disabled={loading}
           className={styles.button}
         >
-          Health Check 테스트
+          Health Check Test
         </button>
-        <button 
-          onClick={testApiStatus} 
+        <button
+          onClick={testApiStatus}
           disabled={loading}
           className={styles.button}
         >
-          API Status 테스트
+          API Status Test
         </button>
       </div>
       <div className={styles.results}>
@@ -71,14 +67,3 @@ export default function ApiTest() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-

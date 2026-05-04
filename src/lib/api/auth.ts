@@ -1,5 +1,5 @@
 /**
- * 인증 관련 API 클라이언트
+ * Authentication API client
  */
 import { apiClient, ApiResponse } from './client';
 
@@ -54,7 +54,7 @@ export interface AuthVerifyResponse {
 }
 
 /**
- * 학생 회원가입
+ * Student sign up
  */
 export async function signupStudent(
   data: SignupStudentData
@@ -63,7 +63,7 @@ export async function signupStudent(
 }
 
 /**
- * 리더 권한 요청
+ * Request leader access
  */
 export async function requestLeaderAccess(
   data: LeaderAccessRequestData,
@@ -76,7 +76,7 @@ export async function requestLeaderAccess(
 }
 
 /**
- * 현재 사용자 정보 조회
+ * Get current user profile
  */
 export async function getCurrentUserProfile(
   token: string
@@ -89,7 +89,7 @@ export async function getCurrentUserProfile(
 }
 
 /**
- * 내 리더 권한 요청 상태 확인
+ * Check my leader access request status
  */
 export async function getMyLeaderRequest(
   token: string
@@ -102,7 +102,7 @@ export async function getMyLeaderRequest(
 }
 
 /**
- * 토큰 검증
+ * Verify token
  */
 export async function verifyToken(
   token: string

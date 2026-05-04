@@ -1,5 +1,5 @@
 """
-Firebase Admin SDK 초기화
+Firebase Admin SDK initialization
 """
 import os
 import firebase_admin
@@ -8,7 +8,7 @@ from app.config import settings
 
 
 def initialize_firebase_admin():
-    """Firebase Admin SDK 초기화"""
+    """Initialize Firebase Admin SDK"""
     if not firebase_admin._apps:
         project_id = os.getenv("FIREBASE_PROJECT_ID")
         private_key = os.getenv("FIREBASE_PRIVATE_KEY", "").replace("\\n", "\n")
@@ -41,14 +41,13 @@ def initialize_firebase_admin():
     return firebase_admin.get_app() if firebase_admin._apps else None
 
 
-# Firebase Admin 초기화 (전역 변수)
 _firebase_initialized = False
 _db = None
 _auth_client = None
 
 
 def get_firestore():
-    """Firestore 클라이언트 반환"""
+    """Return Firestore client"""
     global _firebase_initialized, _db
     if not _firebase_initialized:
         app = initialize_firebase_admin()
@@ -61,7 +60,7 @@ def get_firestore():
 
 
 def get_auth():
-    """Firebase Auth 클라이언트 반환"""
+    """Return Firebase Auth client"""
     global _firebase_initialized, _auth_client
     if not _firebase_initialized:
         initialize_firebase_admin()
@@ -69,10 +68,3 @@ def get_auth():
     if _auth_client is None:
         _auth_client = auth
     return _auth_client
-
-
-
-
-
-
-

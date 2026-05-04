@@ -97,11 +97,9 @@ export default function SignupForm({ onVerificationSent }: SignupFormProps) {
         return;
       }
 
-      // Firebase 로그인 후 인증 메일 발송
       const userCredential = await signIn(formData.email, formData.password);
       await sendVerificationEmail(userCredential.user);
 
-      // 인증 전까지 로그아웃 상태 유지
       await logout();
 
       setVerificationSent(true);

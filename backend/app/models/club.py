@@ -1,5 +1,5 @@
 """
-Club 데이터 모델
+Club data models
 """
 from typing import Optional, List, Dict
 from datetime import datetime
@@ -7,14 +7,14 @@ from pydantic import BaseModel, Field, HttpUrl
 
 
 class MeetingSchedule(BaseModel):
-    """동아리 정기 모임 일정"""
-    day: str = Field(..., description="요일: Monday, Tuesday, etc.")
-    time_slots: List[str] = Field(..., description="시간대: ['16:00-18:00']")
+    """Club regular meeting schedule"""
+    day: str = Field(..., description="Day of week: Monday, Tuesday, etc.")
+    time_slots: List[str] = Field(..., description="Time slots: ['16:00-18:00']")
     location: Optional[str] = None
 
 
 class ClubLeader(BaseModel):
-    """동아리 리더 정보"""
+    """Club leader information"""
     uid: str
     name: str
     role: str = Field(..., description="President, Vice President, etc.")
@@ -23,7 +23,7 @@ class ClubLeader(BaseModel):
 
 
 class ClubStats(BaseModel):
-    """동아리 통계"""
+    """Club statistics"""
     total_members: int = 0
     total_subscribers: int = 0
     total_events: int = 0
@@ -32,14 +32,14 @@ class ClubStats(BaseModel):
 
 
 class Club(BaseModel):
-    """동아리 정보"""
+    """Club information"""
     id: Optional[str] = None
-    name: str = Field(..., description="동아리 이름")
-    description: str = Field(..., description="동아리 설명")
-    tagline: Optional[str] = Field(None, description="한 줄 소개")
-    categories: List[str] = Field(..., description="동아리 카테고리 (복수)")
-    tags: List[str] = Field(default_factory=list, description="태그")
-    activity_type: List[str] = Field(..., description="활동 유형: Online, On-Campus, Off-Campus, Hybrid (복수 선택 가능)")
+    name: str = Field(..., description="Club name")
+    description: str = Field(..., description="Club description")
+    tagline: Optional[str] = Field(None, description="One-line tagline")
+    categories: List[str] = Field(..., description="Club categories (multiple allowed)")
+    tags: List[str] = Field(default_factory=list, description="Tags")
+    activity_type: List[str] = Field(..., description="Activity types: Online, On-Campus, Off-Campus, Hybrid (multiple allowed)")
     meeting_schedule: Optional[List[MeetingSchedule]] = Field(default_factory=list)
     leaders: List[ClubLeader] = Field(default_factory=list)
     contact_email: Optional[str] = None
@@ -55,7 +55,7 @@ class Club(BaseModel):
 
 
 class ClubCreate(BaseModel):
-    """동아리 생성 요청"""
+    """Club creation request"""
     name: str
     description: str
     tagline: Optional[str] = None
@@ -67,7 +67,7 @@ class ClubCreate(BaseModel):
 
 
 class ClubUpdate(BaseModel):
-    """동아리 업데이트 요청"""
+    """Club update request"""
     name: Optional[str] = None
     description: Optional[str] = None
     tagline: Optional[str] = None
@@ -84,9 +84,8 @@ class ClubUpdate(BaseModel):
 
 
 class ClubListResponse(BaseModel):
-    """동아리 목록 응답"""
+    """Club list response"""
     clubs: List[Club]
     total: int
     page: int
     page_size: int
-

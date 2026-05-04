@@ -1,20 +1,20 @@
-# SuperAdmin API 문서
+# SuperAdmin API Documentation
 
-Password Reset Requests를 제외한 모든 SuperAdmin API가 구현되었습니다.
+All SuperAdmin APIs have been implemented except Password Reset Requests.
 
-## 인증
-모든 SuperAdmin API는 `Authorization: Bearer <token>` 헤더와 `super-admin` 역할이 필요합니다.
+## Authentication
+All SuperAdmin APIs require `Authorization: Bearer <token>` header and `super-admin` role.
 
 ---
 
 ## Dashboard APIs
 
-### 1. 플랫폼 전체 통계
+### 1. Platform-wide Statistics
 ```
 GET /api/superadmin/statistics
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "total_clubs": 47,
@@ -32,15 +32,15 @@ GET /api/superadmin/statistics
 }
 ```
 
-### 2. 승인 대기 항목 조회
+### 2. Pending Approvals
 ```
 GET /api/superadmin/pending-approvals?limit=10
 ```
 
 **Query Parameters:**
-- `limit` (optional): 최대 개수 (기본값: 10)
+- `limit` (optional): max count (default: 10)
 
-**응답:**
+**Response:**
 ```json
 {
   "approvals": [
@@ -64,15 +64,15 @@ GET /api/superadmin/pending-approvals?limit=10
 }
 ```
 
-### 3. 최근 클럽 활동 로그
+### 3. Recent Club Activity Log
 ```
 GET /api/superadmin/recent-activities?limit=20
 ```
 
 **Query Parameters:**
-- `limit` (optional): 최대 개수 (기본값: 20)
+- `limit` (optional): max count (default: 20)
 
-**응답:**
+**Response:**
 ```json
 {
   "activities": [
@@ -97,15 +97,15 @@ GET /api/superadmin/recent-activities?limit=20
 }
 ```
 
-### 4. 시스템 알림
+### 4. System Alerts
 ```
 GET /api/superadmin/system-alerts?limit=10
 ```
 
 **Query Parameters:**
-- `limit` (optional): 최대 개수 (기본값: 10)
+- `limit` (optional): max count (default: 10)
 
-**응답:**
+**Response:**
 ```json
 {
   "alerts": [
@@ -124,7 +124,7 @@ GET /api/superadmin/system-alerts?limit=10
 
 ## Club Leaders Management APIs
 
-### 5. 모든 Club Leaders 조회
+### 5. Get All Club Leaders
 ```
 GET /api/superadmin/club-leaders?status_filter=active
 ```
@@ -132,7 +132,7 @@ GET /api/superadmin/club-leaders?status_filter=active
 **Query Parameters:**
 - `status_filter` (optional): `active` | `inactive`
 
-### 6. Club Leader 정보 업데이트
+### 6. Update Club Leader Info
 ```
 PUT /api/superadmin/club-leaders/{uid}
 ```
@@ -145,7 +145,7 @@ PUT /api/superadmin/club-leaders/{uid}
 }
 ```
 
-### 7. Club Leader 상태 업데이트
+### 7. Update Club Leader Status
 ```
 PUT /api/superadmin/club-leaders/{uid}/status?status=inactive
 ```
@@ -153,7 +153,7 @@ PUT /api/superadmin/club-leaders/{uid}/status?status=inactive
 **Query Parameters:**
 - `status` (required): `active` | `inactive`
 
-### 8. Club Leader 할당
+### 8. Assign Club Leader
 ```
 POST /api/superadmin/club-leaders/assign
 ```
@@ -167,7 +167,7 @@ POST /api/superadmin/club-leaders/assign
 }
 ```
 
-### 9. Club Leader 삭제
+### 9. Delete Club Leader
 ```
 DELETE /api/superadmin/club-leaders/{uid}
 ```
@@ -176,19 +176,19 @@ DELETE /api/superadmin/club-leaders/{uid}
 
 ## All Clubs Management APIs
 
-### 10. 모든 클럽 조회 (SuperAdmin 전용)
+### 10. Get All Clubs (SuperAdmin only)
 ```
 GET /api/superadmin/clubs?search=robotics&category=STEM&status=active&page=1&page_size=20
 ```
 
 **Query Parameters:**
-- `search` (optional): 검색어 (클럽 이름)
-- `category` (optional): 카테고리 필터
+- `search` (optional): search term (club name)
+- `category` (optional): category filter
 - `status` (optional): `active` | `inactive`
-- `page` (optional): 페이지 번호 (기본값: 1)
-- `page_size` (optional): 페이지 크기 (기본값: 20)
+- `page` (optional): page number (default: 1)
+- `page_size` (optional): page size (default: 20)
 
-**응답:**
+**Response:**
 ```json
 {
   "clubs": [
@@ -213,7 +213,7 @@ GET /api/superadmin/clubs?search=robotics&category=STEM&status=active&page=1&pag
 }
 ```
 
-### 11. 클럽 생성 (SuperAdmin 전용)
+### 11. Create Club (SuperAdmin only)
 ```
 POST /api/superadmin/clubs
 ```
@@ -231,7 +231,7 @@ POST /api/superadmin/clubs
 }
 ```
 
-### 12. 클럽 수정 (SuperAdmin 전용)
+### 12. Update Club (SuperAdmin only)
 ```
 PUT /api/superadmin/clubs/{club_id}
 ```
@@ -245,20 +245,20 @@ PUT /api/superadmin/clubs/{club_id}
 }
 ```
 
-### 13. 클럽 삭제 (SuperAdmin 전용)
+### 13. Delete Club (SuperAdmin only)
 ```
 DELETE /api/superadmin/clubs/{club_id}?hard_delete=false
 ```
 
 **Query Parameters:**
-- `hard_delete` (optional): `true` (완전 삭제) | `false` (비활성화, 기본값)
+- `hard_delete` (optional): `true` (permanent delete) | `false` (deactivate, default)
 
-### 14. 클럽 통계
+### 14. Club Statistics
 ```
 GET /api/superadmin/clubs/stats
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "active_clubs": 42,
@@ -271,12 +271,12 @@ GET /api/superadmin/clubs/stats
 
 ## Student Users APIs
 
-### 15. 학생 사용자 통계
+### 15. Student User Statistics
 ```
 GET /api/superadmin/students/statistics
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "total_users": 1234,
@@ -286,22 +286,22 @@ GET /api/superadmin/students/statistics
 }
 ```
 
-### 16. 학생 활동 추이 차트
+### 16. Student Activity Trend Chart
 ```
 GET /api/superadmin/students/activity-chart?days=30
 ```
 
 **Query Parameters:**
-- `days` (optional): 조회 기간 (7-90일, 기본값: 30)
+- `days` (optional): query period (7-90 days, default: 30)
 
-**응답:**
+**Response:**
 ```json
 {
-  "labels": ["02/01", "02/02", "02/03", ...],
+  "labels": ["02/01", "02/02", "02/03", "..."],
   "datasets": [
     {
       "label": "New Signups",
-      "data": [12, 15, 8, 20, ...],
+      "data": [12, 15, 8, 20, "..."],
       "borderColor": "#3b82f6",
       "backgroundColor": "rgba(59, 130, 246, 0.1)"
     }
@@ -313,12 +313,12 @@ GET /api/superadmin/students/activity-chart?days=30
 
 ## Platform Analytics APIs
 
-### 17. 플랫폼 분석 개요
+### 17. Platform Analytics Overview
 ```
 GET /api/superadmin/analytics/overview
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "total_page_views": 23456,
@@ -328,22 +328,22 @@ GET /api/superadmin/analytics/overview
 }
 ```
 
-### 18. 트래픽 차트
+### 18. Traffic Chart
 ```
 GET /api/superadmin/analytics/traffic?days=30
 ```
 
 **Query Parameters:**
-- `days` (optional): 조회 기간 (7-90일, 기본값: 30)
+- `days` (optional): query period (7-90 days, default: 30)
 
-**응답:**
+**Response:**
 ```json
 {
-  "labels": ["02/01", "02/02", "02/03", ...],
+  "labels": ["02/01", "02/02", "02/03", "..."],
   "datasets": [
     {
       "label": "Page Views",
-      "data": [150, 180, 120, 200, ...],
+      "data": [150, 180, 120, 200, "..."],
       "borderColor": "#8b5cf6",
       "backgroundColor": "rgba(139, 92, 246, 0.1)"
     }
@@ -351,15 +351,15 @@ GET /api/superadmin/analytics/traffic?days=30
 }
 ```
 
-### 19. 인기 클럽 순위
+### 19. Popular Clubs Ranking
 ```
 GET /api/superadmin/analytics/popular-clubs?limit=10
 ```
 
 **Query Parameters:**
-- `limit` (optional): 최대 개수 (1-50, 기본값: 10)
+- `limit` (optional): max count (1-50, default: 10)
 
-**응답:**
+**Response:**
 ```json
 {
   "clubs": [
@@ -380,12 +380,12 @@ GET /api/superadmin/analytics/popular-clubs?limit=10
 
 ## System Settings APIs
 
-### 20. 플랫폼 설정 조회
+### 20. Get Platform Configurations
 ```
 GET /api/superadmin/system/configurations
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "configurations": [
@@ -411,7 +411,7 @@ GET /api/superadmin/system/configurations
 }
 ```
 
-### 21. 플랫폼 설정 업데이트
+### 21. Update Platform Configuration
 ```
 PUT /api/superadmin/system/configurations/{config_id}
 ```
@@ -426,12 +426,12 @@ PUT /api/superadmin/system/configurations/{config_id}
 }
 ```
 
-### 22. 데이터베이스 백업 생성
+### 22. Create Database Backup
 ```
 POST /api/superadmin/system/backup
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "message": "Backup created successfully",
@@ -441,12 +441,12 @@ POST /api/superadmin/system/backup
 }
 ```
 
-### 23. 시스템 캐시 클리어
+### 23. Clear System Cache
 ```
 POST /api/superadmin/system/clear-cache
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "message": "Cache cleared successfully",
@@ -455,12 +455,12 @@ POST /api/superadmin/system/clear-cache
 }
 ```
 
-### 24. 시스템 정보 조회
+### 24. Get System Info
 ```
 GET /api/superadmin/system/info
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "version": "ClubAtlas v1.0.0",
@@ -474,9 +474,9 @@ GET /api/superadmin/system/info
 
 ---
 
-## 에러 응답
+## Error Responses
 
-모든 API는 에러 발생 시 다음 형식으로 응답합니다:
+All APIs return errors in the following format:
 
 ```json
 {
@@ -484,29 +484,29 @@ GET /api/superadmin/system/info
 }
 ```
 
-**일반적인 HTTP 상태 코드:**
-- `200 OK`: 성공
-- `201 Created`: 리소스 생성 성공
-- `204 No Content`: 성공 (응답 본문 없음)
-- `400 Bad Request`: 잘못된 요청
-- `401 Unauthorized`: 인증 실패
-- `403 Forbidden`: 권한 부족
-- `404 Not Found`: 리소스를 찾을 수 없음
-- `500 Internal Server Error`: 서버 오류
+**Common HTTP Status Codes:**
+- `200 OK`: Success
+- `201 Created`: Resource created successfully
+- `204 No Content`: Success (no response body)
+- `400 Bad Request`: Invalid request
+- `401 Unauthorized`: Authentication failed
+- `403 Forbidden`: Insufficient permissions
+- `404 Not Found`: Resource not found
+- `500 Internal Server Error`: Server error
 
 ---
 
-## 구현 상태
+## Implementation Status
 
-✅ **완료된 API:**
-- Dashboard APIs (4개)
-- Club Leaders Management (5개)
-- All Clubs Management (5개)
-- Student Users (2개)
-- Platform Analytics (3개)
-- System Settings (5개)
+✅ **Completed APIs:**
+- Dashboard APIs (4)
+- Club Leaders Management (5)
+- All Clubs Management (5)
+- Student Users (2)
+- Platform Analytics (3)
+- System Settings (5)
 
-**총 24개 API 엔드포인트 구현 완료**
+**Total: 24 API endpoints implemented**
 
-❌ **미구현:**
-- Password Reset Requests (사용자 요청에 따라 제외)
+❌ **Not implemented:**
+- Password Reset Requests (excluded per requirements)

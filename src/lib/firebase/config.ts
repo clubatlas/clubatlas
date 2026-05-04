@@ -1,5 +1,5 @@
 /**
- * Firebase 초기화 설정
+ * Firebase initialization configuration
  */
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';

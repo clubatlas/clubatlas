@@ -1,5 +1,5 @@
 """
-서버 사이드 인증 검증 서비스
+Server-side authentication verification service
 """
 from typing import Optional
 from firebase_admin import auth
@@ -8,13 +8,13 @@ from app.services.firebase_admin import get_auth
 
 async def verify_id_token(token: str) -> Optional[dict]:
     """
-    Firebase ID 토큰 검증
-    
+    Verify a Firebase ID token.
+
     Args:
-        token: Firebase ID 토큰
-        
+        token: Firebase ID token
+
     Returns:
-        검증된 토큰의 디코딩된 정보 (uid, email 등) 또는 None
+        Decoded token payload (uid, email, etc.) or None
     """
     try:
         auth_client = get_auth()
@@ -26,13 +26,13 @@ async def verify_id_token(token: str) -> Optional[dict]:
 
 async def get_user_by_uid(uid: str) -> Optional[dict]:
     """
-    UID로 사용자 정보 가져오기
-    
+    Retrieve user information by UID.
+
     Args:
-        uid: Firebase 사용자 UID
-        
+        uid: Firebase user UID
+
     Returns:
-        사용자 정보 또는 None
+        User information or None
     """
     try:
         auth_client = get_auth()
@@ -50,14 +50,14 @@ async def get_user_by_uid(uid: str) -> Optional[dict]:
 
 async def set_custom_user_claims(uid: str, claims: dict) -> bool:
     """
-    사용자 커스텀 클레임 설정 (권한 관리)
-    
+    Set custom claims for a user (permission management).
+
     Args:
-        uid: Firebase 사용자 UID
-        claims: 설정할 클레임 (예: {"role": "admin"})
-        
+        uid: Firebase user UID
+        claims: Claims to set (e.g. {"role": "admin"})
+
     Returns:
-        성공 여부
+        Success status
     """
     try:
         auth_client = get_auth()
@@ -69,30 +69,28 @@ async def set_custom_user_claims(uid: str, claims: dict) -> bool:
 
 async def set_user_role(uid: str, role: str) -> bool:
     """
-    사용자 역할 설정 (Firebase Custom Claims + Firestore 동기화)
-    
+    Set user role (Firebase Custom Claims + Firestore sync).
+
     Args:
-        uid: Firebase 사용자 UID
-        role: 역할 (student, club-leader, admin, super-admin)
-        
+        uid: Firebase user UID
+        role: Role (student, club-leader, admin, super-admin)
+
     Returns:
-        성공 여부
+        Success status
     """
     try:
         from app.services.firestore_service import user_service
-        
-        # Firebase Custom Claims 설정
+
         auth_client = get_auth()
         auth_client.set_custom_user_claims(uid, {"role": role})
-        
-        # Firestore 프로필 업데이트 (문서가 없으면 생성)
+
         await user_service.set_document(
             user_service.COLLECTION,
             uid,
             {"role": role},
             merge=True
         )
-        
+
         return True
     except Exception as e:
         print(f"Error setting user role: {e}")
@@ -101,7 +99,7 @@ async def set_user_role(uid: str, role: str) -> bool:
 
 async def get_user_by_email(email: str) -> Optional[dict]:
     """
-    이메일로 Firebase 사용자 조회
+    Look up a Firebase user by email.
     """
     try:
         auth_client = get_auth()
@@ -119,7 +117,7 @@ async def get_user_by_email(email: str) -> Optional[dict]:
 
 async def set_email_verified(uid: str, verified: bool = True) -> bool:
     """
-    사용자 이메일 인증 상태 강제 설정 (SuperAdmin 전용)
+    Force-set a user's email verification status (SuperAdmin only).
     """
     try:
         auth_client = get_auth()
@@ -132,15 +130,15 @@ async def set_email_verified(uid: str, verified: bool = True) -> bool:
 
 async def create_firebase_user(email: str, password: str, display_name: str) -> Optional[dict]:
     """
-    Firebase Authentication에 사용자 생성
-    
+    Create a user in Firebase Authentication.
+
     Args:
-        email: 이메일
-        password: 비밀번호
-        display_name: 표시 이름
-        
+        email: Email address
+        password: Password
+        display_name: Display name
+
     Returns:
-        생성된 사용자 정보 또는 None
+        Created user information or None
     """
     try:
         auth_client = get_auth()
@@ -157,13 +155,3 @@ async def create_firebase_user(email: str, password: str, display_name: str) -> 
     except Exception as e:
         print(f"Error creating Firebase user: {e}")
         return None
-
-
-
-
-
-
-
-
-
-

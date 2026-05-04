@@ -1,5 +1,5 @@
 """
-User 데이터 모델
+User data models
 """
 from typing import Optional, List
 from datetime import datetime
@@ -7,40 +7,40 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class RecommendationPreferences(BaseModel):
-    """AI 추천을 위한 사용자 선호도"""
-    preferred_categories: List[str] = Field(default_factory=list, description="선호하는 동아리 카테고리")
-    preferred_activity_types: List[str] = Field(default_factory=list, description="선호하는 활동 유형")
-    available_time_slots: List[str] = Field(default_factory=list, description="활동 가능한 시간대")
+    """User preferences for AI recommendations"""
+    preferred_categories: List[str] = Field(default_factory=list, description="Preferred club categories")
+    preferred_activity_types: List[str] = Field(default_factory=list, description="Preferred activity types")
+    available_time_slots: List[str] = Field(default_factory=list, description="Available time slots")
     last_updated: Optional[datetime] = None
-    source: str = Field(default="profile", description="수집 출처: ai-form 또는 profile")
+    source: str = Field(default="profile", description="Collection source: ai-form or profile")
 
 
 class UserProfile(BaseModel):
-    """사용자 프로필"""
+    """User profile"""
     uid: str = Field(..., description="Firebase UID")
     email: EmailStr
     display_name: Optional[str] = None
-    role: str = Field(default="student", description="역할: student, club-leader, admin, super-admin")
-    interests: List[str] = Field(default_factory=list, description="관심사 태그")
+    role: str = Field(default="student", description="Role: student, club-leader, admin, super-admin")
+    interests: List[str] = Field(default_factory=list, description="Interest tags")
     recommendation_preferences: Optional[RecommendationPreferences] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
 
 class UserProfileCreate(BaseModel):
-    """사용자 프로필 생성 요청"""
+    """User profile creation request"""
     display_name: str
     interests: List[str] = Field(default_factory=list)
 
 
 class UserProfileUpdate(BaseModel):
-    """사용자 프로필 업데이트 요청"""
+    """User profile update request"""
     display_name: Optional[str] = None
     interests: Optional[List[str]] = None
 
 
 class ProfileEditRequest(BaseModel):
-    """Edit Profile 모달에서 수정 가능한 필드"""
+    """Fields editable from the Edit Profile modal"""
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     email: Optional[str] = None
@@ -48,26 +48,26 @@ class ProfileEditRequest(BaseModel):
 
 
 class RecommendationPreferencesUpdate(BaseModel):
-    """추천 선호도 업데이트 요청"""
-    preferred_categories: List[str] = Field(..., description="선호하는 카테고리 (복수 선택)")
-    preferred_activity_types: List[str] = Field(..., description="선호하는 활동 유형 (복수 선택)")
-    available_time_slots: List[str] = Field(..., description="활동 가능한 시간대 (복수 선택)")
+    """Recommendation preferences update request"""
+    preferred_categories: List[str] = Field(..., description="Preferred categories (multi-select)")
+    preferred_activity_types: List[str] = Field(..., description="Preferred activity types (multi-select)")
+    available_time_slots: List[str] = Field(..., description="Available time slots (multi-select)")
 
 
 class NotificationPreferencesUpdate(BaseModel):
-    """알림 설정 업데이트 요청"""
+    """Notification preferences update request"""
     email_notifications: bool
     event_reminders: bool
 
 
 class UserNotificationPreferences(BaseModel):
-    """사용자 알림 설정"""
+    """User notification preferences"""
     email_notifications: bool = True
     event_reminders: bool = True
 
 
 class UserProfileResponse(BaseModel):
-    """사용자 프로필 응답"""
+    """User profile response"""
     uid: str
     email: str
     display_name: Optional[str]
@@ -80,5 +80,3 @@ class UserProfileResponse(BaseModel):
     notification_preferences: Optional[UserNotificationPreferences] = None
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
-
-

@@ -1,5 +1,5 @@
 """
-Bookmarks API 엔드포인트
+Bookmarks API endpoints
 """
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -22,31 +22,30 @@ async def create_bookmark(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    클럽 북마크 추가
-    
-    - 인증된 사용자 전용
-    - 중복 북마크 방지
+    Add a club bookmark
+
+    - Authenticated users only
+    - Prevents duplicate bookmarks
     """
     user_id = current_user['uid']
     club_id = bookmark_data.club_id
-    
-    # 클럽 존재 확인
+
     club = await club_service.get_club(club_id)
     if not club:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Club not found"
         )
-    
+
     try:
         bookmark_id = str(uuid.uuid4())
-        
+
         created_bookmark = await bookmark_service.create_bookmark(
             bookmark_id=bookmark_id,
             user_id=user_id,
             club_id=club_id
         )
-        
+
         return Bookmark(**created_bookmark)
     except ValueError as e:
         raise HTTPException(
@@ -66,25 +65,24 @@ async def get_my_bookmarks(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    내 북마크 목록 조회
-    
-    - 인증된 사용자 전용
-    - 클럽 상세 정보 포함
+    Get my bookmark list
+
+    - Authenticated users only
+    - Includes club details
     """
     user_id = current_user['uid']
-    
+
     try:
         bookmarks = await bookmark_service.get_user_bookmarks(user_id)
-        
+
         if not bookmarks:
             return BookmarkListResponse(bookmarks=[], total=0)
-        
-        # 클럽 상세 정보 가져오기
+
         bookmarked_clubs = []
         for bookmark in bookmarks:
             club_id = bookmark['club_id']
             club = await club_service.get_club(club_id)
-            
+
             if club:
                 bookmarked_club = BookmarkedClub(
                     bookmark_id=bookmark['id'],
@@ -95,12 +93,12 @@ async def get_my_bookmarks(
                     categories=club['categories'],
                     logo_url=club.get('logo_url'),
                     banner_url=club.get('banner_url'),
-                    match_score=None,  # 추후 AI 추천 연동 시 사용
+                    match_score=None,
                     match_reason=None,
                     bookmarked_at=bookmark['created_at']
                 )
                 bookmarked_clubs.append(bookmarked_club)
-        
+
         return BookmarkListResponse(
             bookmarks=bookmarked_clubs,
             total=len(bookmarked_clubs)
@@ -119,13 +117,13 @@ async def delete_bookmark(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    북마크 삭제
-    
-    - 인증된 사용자 전용
-    - 자신의 북마크만 삭제 가능
+    Delete a bookmark
+
+    - Authenticated users only
+    - Can only delete own bookmarks
     """
     user_id = current_user['uid']
-    
+
     try:
         await bookmark_service.delete_bookmark(user_id, club_id)
         return None
@@ -148,12 +146,12 @@ async def check_bookmark(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    특정 클럽 북마크 여부 확인
-    
-    - 인증된 사용자 전용
+    Check if a specific club is bookmarked
+
+    - Authenticated users only
     """
     user_id = current_user['uid']
-    
+
     try:
         bookmark = await bookmark_service.get_user_bookmark(user_id, club_id)
         return {"is_bookmarked": bookmark is not None}

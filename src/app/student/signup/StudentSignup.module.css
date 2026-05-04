@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 100%;
-  min-width: 1400px; /* Figma 디자인 기준 최소 너비 */
+  min-width: 1400px;
   min-height: 100vh;
   background: white;
 }
@@ -11,13 +11,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-width: 1400px; /* Figma 디자인 기준 */
+  min-width: 1400px;
   height: 100%;
   background: linear-gradient(129.41deg, rgba(241, 255, 246, 1) 0%, rgba(234, 245, 242, 1) 50%, rgba(241, 255, 246, 1) 100%);
   overflow: hidden;
 }
 
-/* 배경 블러 효과 원형 장식 */
 .blurCircle1 {
   position: absolute;
   width: 316.726px;
@@ -67,7 +66,6 @@
   box-sizing: border-box;
 }
 
-/* 상단 헤더 섹션 */
 .headerSection {
   display: flex;
   flex-direction: column;
@@ -102,7 +100,6 @@
   letter-spacing: -0.4492px;
 }
 
-/* 중앙 회원가입 카드 */
 .signupCard {
   display: flex;
   width: 1024px;
@@ -113,7 +110,6 @@
   align-items: stretch;
 }
 
-/* 푸터 */
 .footer {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -125,7 +121,6 @@
   letter-spacing: -0.1504px;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 1199px) {
   .container {
     min-width: 100%;

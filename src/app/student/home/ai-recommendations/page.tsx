@@ -11,7 +11,6 @@ import { getClub, Club } from '@/lib/api/clubs';
 
 const SESSION_KEY = 'ai_recommendations_state';
 
-// AI Recommendations 페이지 전용 아이콘
 const aiStarIcon = "/images/icons/ai/star.svg";
 const targetIcon = "/images/icons/ai/target.svg";
 const clockIcon = "/images/icons/ai/clock.svg";
@@ -19,7 +18,6 @@ const boltIcon = "/images/icons/ai/bolt.svg";
 const assistantIcon = "/images/icons/ai/assistant.svg";
 const aiIcon = "/images/icons/ai/ai-avatar.svg";
 
-// 카테고리 옵션
 const CATEGORIES = [
   'Student Leadership and Media',
   'Cultural Affinity Groups',
@@ -37,12 +35,10 @@ const CATEGORIES = [
   'Sports and Recreations'
 ];
 
-// 활동 유형 옵션
 const ACTIVITY_TYPES = [
   'Online', 'On-Campus', 'Off-Campus', 'Hybrid'
 ];
 
-// 시간대 옵션 (9AM - 8PM)
 const TIME_SLOTS = [
   '09:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00',
@@ -157,7 +153,6 @@ export default function AIRecommendationsPage() {
 
       const token = await user.getIdToken();
 
-      // Step 1: 선호도 저장
       const preferencesData = {
         preferred_categories: selectedCategories,
         preferred_activity_types: selectedActivityTypes,
@@ -172,7 +167,6 @@ export default function AIRecommendationsPage() {
         return;
       }
 
-      // Step 2: 추천 받기
       const recommendationsResponse = await getRecommendations({ limit: 10 });
 
       if (recommendationsResponse.error) {
@@ -186,7 +180,6 @@ export default function AIRecommendationsPage() {
         setRecommendations(recs);
         setCurrentStep(4);
 
-        // Step 3: 각 추천 club의 상세 정보 병렬로 가져오기
         const clubResults = await Promise.all(
           recs.map(rec =>
             getClub(rec.club_id).catch(err => {

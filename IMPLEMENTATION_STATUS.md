@@ -1,156 +1,156 @@
-# ClubAtlas 구현 상태
+# ClubAtlas Implementation Status
 
-> 최종 업데이트: 2026-02-14
+> Last updated: 2026-02-14
 
-## 📋 목차
-- [완료된 기능](#완료된-기능)
-- [진행 중인 기능](#진행-중인-기능)
-- [미구현 기능](#미구현-기능)
-- [기술 스택](#기술-스택)
-- [다음 단계](#다음-단계)
+## 📋 Table of Contents
+- [Completed Features](#completed-features)
+- [In Progress](#in-progress)
+- [Unimplemented Features](#unimplemented-features)
+- [Tech Stack](#tech-stack)
+- [Next Steps](#next-steps)
 
 ---
 
-## ✅ 완료된 기능
+## ✅ Completed Features
 
-### 1. 인증 시스템 (Authentication)
+### 1. Authentication System
 
-#### 1.1 백엔드 인증 API ✅
-**위치**: `backend/app/api/auth.py`
-- ✅ 학생 회원가입 (`POST /api/auth/signup/student`)
-  - 이메일/비밀번호 검증 (강화된 정책: 8자 이상, 대소문자, 숫자)
-  - Firebase Authentication 연동
-  - Firestore 프로필 자동 생성
-- ✅ 리더 권한 요청 (`POST /api/auth/leader-access/request`)
-- ✅ 현재 사용자 정보 조회 (`GET /api/auth/me`)
-- ✅ 내 리더 권한 요청 상태 확인 (`GET /api/auth/leader-access/my-request`)
+#### 1.1 Backend Auth API ✅
+**Location**: `backend/app/api/auth.py`
+- ✅ Student signup (`POST /api/auth/signup/student`)
+  - Email/password validation (strict policy: 8+ chars, upper/lowercase, numbers)
+  - Firebase Authentication integration
+  - Firestore profile auto-creation
+- ✅ Leader access request (`POST /api/auth/leader-access/request`)
+- ✅ Current user info (`GET /api/auth/me`)
+- ✅ My leader access request status (`GET /api/auth/leader-access/my-request`)
 
-**위치**: `backend/app/api/admin/leader_requests.py`
-- ✅ 모든 리더 권한 요청 조회 (`GET /api/admin/leader-requests`)
-- ✅ 특정 요청 상세 조회 (`GET /api/admin/leader-requests/{id}`)
-- ✅ 요청 승인 (`POST /api/admin/leader-requests/{id}/approve`)
-- ✅ 요청 거부 (`POST /api/admin/leader-requests/{id}/reject`)
-- ✅ 사용자 역할 직접 변경 (`PUT /api/admin/leader-requests/users/{uid}/role`)
+**Location**: `backend/app/api/admin/leader_requests.py`
+- ✅ All leader access requests (`GET /api/admin/leader-requests`)
+- ✅ Request details (`GET /api/admin/leader-requests/{id}`)
+- ✅ Approve request (`POST /api/admin/leader-requests/{id}/approve`)
+- ✅ Reject request (`POST /api/admin/leader-requests/{id}/reject`)
+- ✅ Direct role change (`PUT /api/admin/leader-requests/users/{uid}/role`)
 
-#### 1.2 역할 기반 접근 제어 (RBAC) ✅
-**백엔드**: `backend/app/api/dependencies.py`, `backend/app/middleware/firebase_auth.py`
-- ✅ Firebase Custom Claims 설정
-- ✅ Firestore 역할 동기화
-- ✅ 의존성 함수
-  - `get_current_user`: 인증된 사용자 확인
-  - `require_admin`: Admin/ClubLeader 권한 확인
-  - `require_club_leader`: ClubLeader 권한 확인
-  - `require_super_admin`: SuperAdmin 권한 확인
+#### 1.2 Role-Based Access Control (RBAC) ✅
+**Backend**: `backend/app/api/dependencies.py`, `backend/app/middleware/firebase_auth.py`
+- ✅ Firebase Custom Claims setup
+- ✅ Firestore role synchronization
+- ✅ Dependency functions
+  - `get_current_user`: Verify authenticated user
+  - `require_admin`: Verify Admin/ClubLeader permission
+  - `require_club_leader`: Verify ClubLeader permission
+  - `require_super_admin`: Verify SuperAdmin permission
 
-**프론트엔드**: `src/components/ProtectedRoute.tsx`, `src/contexts/AuthContext.tsx`
-- ✅ `ProtectedRoute` 컴포넌트로 라우트 보호
-- ✅ `AuthContext`로 전역 인증 상태 관리
-- ✅ 역할별 헬퍼 함수 (`isStudent`, `isClubLeader`, `isSuperAdmin`, `hasRole`)
+**Frontend**: `src/components/ProtectedRoute.tsx`, `src/contexts/AuthContext.tsx`
+- ✅ Route protection via `ProtectedRoute` component
+- ✅ Global auth state management via `AuthContext`
+- ✅ Role helper functions (`isStudent`, `isClubLeader`, `isSuperAdmin`, `hasRole`)
 
-#### 1.3 프론트엔드 인증 로직 ✅
-**로그인 페이지**:
-- ✅ `src/app/student/login/page.tsx` - 학생 로그인
-- ✅ `src/app/admin/login/page.tsx` - Admin/SuperAdmin 로그인 (탭 전환)
+#### 1.3 Frontend Auth Logic ✅
+**Login pages**:
+- ✅ `src/app/student/login/page.tsx` - Student login
+- ✅ `src/app/admin/login/page.tsx` - Admin/SuperAdmin login (tab switching)
 
-**회원가입 페이지**:
-- ✅ `src/app/student/signup/page.tsx` - 학생 회원가입
-- ✅ `src/app/admin/request-access/page.tsx` - 리더 권한 요청
+**Signup pages**:
+- ✅ `src/app/student/signup/page.tsx` - Student signup
+- ✅ `src/app/admin/request-access/page.tsx` - Leader access request
 
-**레이아웃 보호**:
+**Layout protection**:
 - ✅ `/student/home/*` - `requireAuth=true`
 - ✅ `/admin/dashboard/*` - `requireAuth=true, requiredRole="club-leader"`
 - ✅ `/superadmin/*` - `requireAuth=true, requiredRole="super-admin"`
 
-#### 1.4 초기 SuperAdmin 계정 ✅
-**위치**: `backend/scripts/create_superadmin.py`
-- ✅ 계정 정보:
-  - 이메일: `superadmin@gmail.com`
-  - 비밀번호: `Super123`
-  - 이름: `superadmin`
-- ✅ Firebase Authentication 계정 생성
-- ✅ Firestore 프로필 생성
-- ✅ Custom Claims 설정 (`role: super-admin`)
+#### 1.4 Initial SuperAdmin Account ✅
+**Location**: `backend/scripts/create_superadmin.py`
+- ✅ Account info:
+  - Email: `superadmin@gmail.com`
+  - Password: `Super123`
+  - Name: `superadmin`
+- ✅ Firebase Authentication account creation
+- ✅ Firestore profile creation
+- ✅ Custom Claims set (`role: super-admin`)
 
 ---
 
-### 2. 사용자 관리 (User Management)
+### 2. User Management
 
-#### 2.1 로그아웃 기능 ✅
-**구현 위치**:
-- ✅ `src/app/student/home/components/Header.tsx` - 프로필 드롭다운 메뉴
-- ✅ `src/app/admin/dashboard/components/DashboardHeader.tsx` - 로그아웃 버튼
-- ✅ `src/app/superadmin/dashboard/components/SuperAdminHeader.tsx` - 로그아웃 버튼
+#### 2.1 Logout Functionality ✅
+**Implementation locations**:
+- ✅ `src/app/student/home/components/Header.tsx` - Profile dropdown menu
+- ✅ `src/app/admin/dashboard/components/DashboardHeader.tsx` - Logout button
+- ✅ `src/app/superadmin/dashboard/components/SuperAdminHeader.tsx` - Logout button
 
-**기능**:
-- ✅ Firebase `signOut()` 호출
-- ✅ 역할별 로그인 페이지로 리다이렉트
+**Features**:
+- ✅ Firebase `signOut()` call
+- ✅ Redirect to role-specific login page
 
-#### 2.2 프로필 편집 ✅
-**공통 컴포넌트**: `src/components/EditProfileModal.tsx`
-- ✅ Display Name 변경
-- ✅ 이메일 표시 (변경 불가)
-- ✅ 실시간 프로필 새로고침
+#### 2.2 Profile Editing ✅
+**Shared component**: `src/components/EditProfileModal.tsx`
+- ✅ Display Name change
+- ✅ Email display (read-only)
+- ✅ Real-time profile refresh
 
-**통합 위치**:
-- ✅ Student Header - "Edit Profile" 메뉴 항목
-- ✅ Admin Dashboard Header - Settings 버튼
-- ✅ SuperAdmin Header - Settings 버튼
+**Integration locations**:
+- ✅ Student Header - "Edit Profile" menu item
+- ✅ Admin Dashboard Header - Settings button
+- ✅ SuperAdmin Header - Settings button
 
-**백엔드 API**: `backend/app/api/users.py`
-- ✅ `POST /api/users/profile` - 프로필 생성/업데이트
-- ✅ `GET /api/users/profile` - 내 프로필 조회
-- ✅ `PUT /api/users/interests` - 관심사 업데이트
-
----
-
-### 3. SuperAdmin 기능
-
-#### 3.1 리더 권한 요청 관리 UI ✅
-**위치**: `src/app/superadmin/club-leaders/page.tsx`
-
-**기능**:
-- ✅ 탭 기반 UI
-  - "Current Leaders" - 기존 리더 목록 (더미 데이터)
-  - "Pending Requests" - 대기 중인 권한 요청
-- ✅ `PendingRequestsTable.tsx` - 요청 목록 테이블
-  - 요청자 정보 (이름, 이메일, 요청 클럽, 직책)
-  - 요청 날짜, 사유
-  - 승인/거부 버튼
-- ✅ `ApproveRequestModal.tsx` - 승인 모달
-  - 동아리 선택 (Clubs API 연동)
-  - Admin Notes (선택)
-  - 승인 시 자동으로:
-    - 사용자 역할 → `club-leader`
-    - 동아리 leaders 배열에 추가
-    - 요청 상태 → `approved`
-- ✅ `RejectRequestModal.tsx` - 거부 모달
-  - 거부 사유 입력 (필수)
-  - 요청 상태 → `rejected`
+**Backend API**: `backend/app/api/users.py`
+- ✅ `POST /api/users/profile` - Create/update profile
+- ✅ `GET /api/users/profile` - Get my profile
+- ✅ `PUT /api/users/interests` - Update interests
 
 ---
 
-### 4. API 클라이언트
+### 3. SuperAdmin Features
 
-**생성된 파일**:
-- ✅ `src/lib/api/auth.ts` - 인증 관련 API
-- ✅ `src/lib/api/admin.ts` - SuperAdmin 전용 API
-- ✅ `src/lib/api/clubs.ts` - 동아리 관련 API
-- ✅ `src/lib/api/users.ts` - 사용자 관련 API
-- ✅ `src/lib/api/client.ts` - 공통 API 클라이언트 (자동 토큰 주입)
+#### 3.1 Leader Access Request Management UI ✅
+**Location**: `src/app/superadmin/club-leaders/page.tsx`
+
+**Features**:
+- ✅ Tab-based UI
+  - "Current Leaders" - Existing leader list
+  - "Pending Requests" - Pending access requests
+- ✅ `PendingRequestsTable.tsx` - Request list table
+  - Requester info (name, email, requested club, role)
+  - Request date, reason
+  - Approve/Reject buttons
+- ✅ `ApproveRequestModal.tsx` - Approval modal
+  - Club selection (integrated with Clubs API)
+  - Admin Notes (optional)
+  - On approval automatically:
+    - User role → `club-leader`
+    - Adds to club leaders array
+    - Request status → `approved`
+- ✅ `RejectRequestModal.tsx` - Rejection modal
+  - Rejection reason input (required)
+  - Request status → `rejected`
 
 ---
 
-### 5. Firebase 설정
+### 4. API Client
 
-#### 5.1 Firebase 프로젝트 ✅
-- ✅ Firebase Console 프로젝트 생성
-- ✅ Authentication 활성화 (Email/Password)
-- ✅ Firestore Database 생성
-- ✅ Web App 등록 및 구성 정보 획득
-- ✅ Service Account Key 다운로드
+**Created files**:
+- ✅ `src/lib/api/auth.ts` - Auth-related API
+- ✅ `src/lib/api/admin.ts` - SuperAdmin-specific API
+- ✅ `src/lib/api/clubs.ts` - Club-related API
+- ✅ `src/lib/api/users.ts` - User-related API
+- ✅ `src/lib/api/client.ts` - Common API client (auto token injection)
 
-#### 5.2 환경 변수 ✅
-**프론트엔드**: `.env.local`
+---
+
+### 5. Firebase Setup
+
+#### 5.1 Firebase Project ✅
+- ✅ Firebase Console project created
+- ✅ Authentication enabled (Email/Password)
+- ✅ Firestore Database created
+- ✅ Web App registered and configuration obtained
+- ✅ Service Account Key downloaded
+
+#### 5.2 Environment Variables ✅
+**Frontend**: `.env.local`
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=...
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
@@ -161,274 +161,274 @@ NEXT_PUBLIC_FIREBASE_APP_ID=...
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-**백엔드**: `backend/.env`
+**Backend**: `backend/.env`
 ```
 FIREBASE_PROJECT_ID=...
 FIREBASE_PRIVATE_KEY_PATH=./serviceAccountKey.json
 ALLOWED_ORIGINS=http://localhost:3000
 ```
 
-#### 5.3 Firestore 보안 규칙 ✅
-**위치**: `firestore.rules`
-- ✅ 역할 기반 접근 제어 규칙
-- ✅ 컬렉션별 권한 설정
-  - `users`: 본인 읽기/쓰기
-  - `clubs`: 공개 읽기, 리더만 쓰기
-  - `leader_access_requests`: 본인 및 SuperAdmin 접근
+#### 5.3 Firestore Security Rules ✅
+**Location**: `firestore.rules`
+- ✅ Role-based access control rules
+- ✅ Per-collection permission settings
+  - `users`: Owner read/write
+  - `clubs`: Public read, leader-only write
+  - `leader_access_requests`: Owner and SuperAdmin access
 
 ---
 
-### 6. 학생 페이지 기능 ✅
+### 6. Student Page Features ✅
 
-#### 6.1 검색 기능 (Student Header) ✅
-**위치**: `src/app/student/home/components/Header.tsx`
-- ✅ 검색 드롭다운 UI
-- ✅ 클럽 및 이벤트 통합 검색
-- ✅ 실시간 검색 결과 표시
-- ✅ 검색 결과 클릭 시 해당 페이지로 이동
-- ✅ 검색 결과 섹션 구분 (Clubs / Events)
-- ✅ 최소 2자 이상 입력 시 검색
-- ✅ 검색어 기반 필터링 (이름, 설명, 카테고리)
+#### 6.1 Search (Student Header) ✅
+**Location**: `src/app/student/home/components/Header.tsx`
+- ✅ Search dropdown UI
+- ✅ Integrated club and event search
+- ✅ Real-time search results
+- ✅ Navigate to page on result click
+- ✅ Result sections (Clubs / Events)
+- ✅ Search triggers at 2+ characters
+- ✅ Keyword-based filtering (name, description, category)
 
-**API 연동**: `getClubs()`, `getEvents()`
+**API integration**: `getClubs()`, `getEvents()`
 
-#### 6.2 Student Calendar - Export 기능 ✅
-**위치**: `src/app/student/home/calendar/page.tsx`
-- ✅ iCalendar (.ics) 포맷으로 내보내기
-- ✅ 현재 월의 이벤트 데이터 포함
-- ✅ 표준 iCal 필드 지원:
-  - VEVENT (이벤트)
-  - SUMMARY (제목)
-  - DTSTART/DTEND (시작/종료 시간)
-  - LOCATION (장소)
-  - DESCRIPTION (설명)
-- ✅ 파일 다운로드 자동화
-- ✅ 이벤트가 없을 경우 경고 표시
+#### 6.2 Student Calendar - Export ✅
+**Location**: `src/app/student/home/calendar/page.tsx`
+- ✅ Export as iCalendar (.ics) format
+- ✅ Includes current month's event data
+- ✅ Standard iCal fields:
+  - VEVENT (event)
+  - SUMMARY (title)
+  - DTSTART/DTEND (start/end time)
+  - LOCATION (location)
+  - DESCRIPTION (description)
+- ✅ Automated file download
+- ✅ Warning when no events
 
-#### 6.3 Student Calendar - Create Event 기능 (Club Leader 전용) ✅
-**위치**: `src/app/student/home/calendar/components/CreateEventModal.tsx`
-- ✅ Club Leader만 "Create" 버튼 표시
-- ✅ 관리 중인 클럽 목록 동적 로드
-- ✅ 이벤트 생성 API 연동 (`createEvent`)
-- ✅ 필수 필드 검증:
-  - 이벤트 제목
-  - 클럽 선택
-  - 날짜 및 시간 (시작/종료)
-  - 장소
-  - 설명
-- ✅ DatePicker 컴포넌트 통합
-- ✅ 이벤트 생성 후 캘린더 자동 새로고침
-- ✅ 로딩 상태 및 에러 처리
-- ✅ 성공 시 모달 자동 닫기
+#### 6.3 Student Calendar - Create Event (Club Leader only) ✅
+**Location**: `src/app/student/home/calendar/components/CreateEventModal.tsx`
+- ✅ "Create" button visible to Club Leaders only
+- ✅ Dynamic load of managed clubs list
+- ✅ Event creation API integration (`createEvent`)
+- ✅ Required field validation:
+  - Event title
+  - Club selection
+  - Date and time (start/end)
+  - Location
+  - Description
+- ✅ DatePicker component integration
+- ✅ Calendar auto-refresh after event creation
+- ✅ Loading state and error handling
+- ✅ Auto-close modal on success
 
-**API 연동**: `createEvent()`, `getClub()`
+**API integration**: `createEvent()`, `getClub()`
 
-**역할 기반 접근 제어**:
-- Club Leader 및 Admin만 Create 버튼 표시
-- 일반 학생은 버튼 숨김 처리
-
----
-
-## 🚧 진행 중인 기능
-
-### 현재 진행 중인 항목 없음
-
-모든 계획된 인증 기능(1~3, 5, 7단계)이 완료되었습니다.
+**Role-based access control**:
+- Create button visible to Club Leader and Admin only
+- Button hidden for regular students
 
 ---
 
-## ❌ 미구현 기능
+## 🚧 In Progress
 
-### 1. 비밀번호 재설정 (6단계)
-**예정 위치**: `src/app/student/login/components/ForgotPasswordModal.tsx`
+### Nothing currently in progress
 
-**필요 기능**:
-- [ ] Firebase Password Reset Email 발송
-- [ ] 비밀번호 재설정 모달 UI
-- [ ] 이메일 입력 후 재설정 링크 발송
-- [ ] 성공/실패 메시지 표시
-
-**백엔드**: Firebase Admin SDK의 `generatePasswordResetLink()` 사용 가능
+All planned authentication features (steps 1–3, 5, 7) are complete.
 
 ---
 
-### 2. 실제 동아리 데이터 연동
-**현재 상태**: 
-- Clubs API는 구현되어 있음 (`backend/app/api/clubs.py`)
-- 프론트엔드는 일부 더미 데이터 사용 중
+## ❌ Unimplemented Features
 
-**필요 작업**:
-- [ ] `/superadmin/club-leaders` Current Leaders 탭에서 실제 Firestore 데이터 사용
-- [ ] 더미 데이터를 Firestore에 마이그레이션
-- [ ] 모든 페이지에서 실제 API 호출로 전환
+### 1. Password Reset (Step 6)
+**Planned location**: `src/app/student/login/components/ForgotPasswordModal.tsx`
+
+**Required features**:
+- [ ] Firebase Password Reset Email dispatch
+- [ ] Password reset modal UI
+- [ ] Send reset link after email input
+- [ ] Success/failure message display
+
+**Backend**: Firebase Admin SDK `generatePasswordResetLink()` available
 
 ---
 
-### 3. AI 추천 시스템
-**위치**: `backend/app/services/recommendation_service.py`
+### 2. Real Club Data Integration
+**Current state**:
+- Clubs API is implemented (`backend/app/api/clubs.py`)
+- Frontend uses some dummy data
 
-**구현된 내용**:
-- ✅ Hybrid Collaborative Filtering 알고리즘
+**Required work**:
+- [ ] Use real Firestore data in `/superadmin/club-leaders` Current Leaders tab
+- [ ] Migrate dummy data to Firestore
+- [ ] Switch all pages to real API calls
+
+---
+
+### 3. AI Recommendation System
+**Location**: `backend/app/services/recommendation_service.py`
+
+**Implemented**:
+- ✅ Hybrid Collaborative Filtering algorithm
 - ✅ Content-based + Collaborative Filtering
-- ✅ 백엔드 API (`GET /api/recommendations/personalized`)
+- ✅ Backend API (`GET /api/recommendations/personalized`)
 
-**미구현**:
-- [ ] 프론트엔드 AI Recommendations 페이지 실제 API 연동
-- [ ] 추천 결과 표시 및 UI 개선
-- [ ] 사용자 피드백 수집 (좋아요/싫어요)
-
----
-
-### 4. 이벤트 관리
-**백엔드**: `backend/app/api/events.py` (존재하지 않음)
-
-**필요 기능**:
-- [ ] 이벤트 CRUD API
-- [ ] 출석 체크 기능
-- [ ] 이벤트 알림 시스템
-- [ ] 캘린더 통합
+**Not implemented**:
+- [ ] Frontend AI Recommendations page real API integration
+- [ ] Recommendation result display and UI improvements
+- [ ] User feedback collection (like/dislike)
 
 ---
 
-### 5. 구독 시스템
-**백엔드**: `backend/app/api/subscriptions.py` (존재하지 않음)
+### 4. Event Management
+**Backend**: `backend/app/api/events.py`
 
-**필요 기능**:
-- [ ] 동아리 구독 API
-- [ ] 구독 알림 설정
-- [ ] 구독 통계
-
----
-
-### 6. Admin Dashboard 실제 데이터 연동
-**현재 상태**: 대부분 더미 데이터 사용
-
-**필요 작업**:
-- [ ] 동아리 프로필 편집 (기존 페이지 있음)
-- [ ] 이벤트 생성/관리 실제 API 연동
-- [ ] 공지사항 생성/관리 실제 API 연동
-- [ ] 구독자 관리 실제 데이터 연동
-- [ ] 통계 대시보드 실제 데이터 표시
+**Required features**:
+- [ ] Event CRUD API
+- [ ] Attendance check functionality
+- [ ] Event notification system
+- [ ] Calendar integration
 
 ---
 
-### 7. Student 페이지 기타 기능
-**필요 작업**:
-- [ ] Collaborations 페이지 구현
+### 5. Subscription System
+**Backend**: `backend/app/api/subscriptions.py`
+
+**Required features**:
+- [ ] Club subscription API
+- [ ] Subscription notification settings
+- [ ] Subscription statistics
 
 ---
 
-### 8. 검색 및 필터링 고도화 (선택적 개선 사항)
-**현재 상태**: 기본 검색 기능 구현 완료
-- ✅ Student Header 검색 (클럽 및 이벤트)
-- ✅ Browse Clubs 필터링 및 검색
+### 6. Admin Dashboard Real Data Integration
+**Current state**: Mostly using dummy data
 
-**추가 개선 사항 (선택적)**:
-- [ ] 전체 텍스트 검색 (Algolia 또는 Elasticsearch)
-- [ ] 고급 필터링 옵션
-- [ ] 자동완성 기능
-
----
-
-### 9. 알림 시스템
-- [ ] 실시간 알림 (Firebase Cloud Messaging)
-- [ ] 이메일 알림
-- [ ] 알림 설정 관리
+**Required work**:
+- [ ] Club profile editing
+- [ ] Event creation/management real API integration
+- [ ] Announcement creation/management real API integration
+- [ ] Subscriber management real data integration
+- [ ] Statistics dashboard real data display
 
 ---
 
-### 10. 파일 업로드
-- [ ] Firebase Storage 통합
-- [ ] 이미지 업로드 (동아리 로고, 배너, 갤러리)
-- [ ] 파일 크기 제한 및 검증
+### 7. Other Student Page Features
+**Required work**:
+- [ ] Collaborations page implementation
 
 ---
 
-## 🛠 기술 스택
+### 8. Search & Filtering Enhancements (Optional)
+**Current state**: Basic search implemented
+- ✅ Student Header search (clubs and events)
+- ✅ Browse Clubs filtering and search
+
+**Additional improvements (optional)**:
+- [ ] Full-text search (Algolia or Elasticsearch)
+- [ ] Advanced filtering options
+- [ ] Autocomplete functionality
+
+---
+
+### 9. Notification System
+- [ ] Real-time notifications (Firebase Cloud Messaging)
+- [ ] Email notifications
+- [ ] Notification settings management
+
+---
+
+### 10. File Upload
+- [ ] Firebase Storage integration
+- [ ] Image upload (club logo, banner, gallery)
+- [ ] File size limits and validation
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
-- **프레임워크**: Next.js 15 (App Router)
-- **언어**: TypeScript
-- **스타일링**: CSS Modules
-- **인증**: Firebase Authentication (Client SDK)
-- **상태 관리**: React Context API
-- **HTTP 클라이언트**: Fetch API (Custom Wrapper)
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: CSS Modules
+- **Authentication**: Firebase Authentication (Client SDK)
+- **State Management**: React Context API
+- **HTTP Client**: Fetch API (Custom Wrapper)
 
 ### Backend
-- **프레임워크**: FastAPI
-- **언어**: Python 3.10+
-- **데이터베이스**: Firebase Firestore
-- **인증**: Firebase Admin SDK
-- **데이터 검증**: Pydantic
+- **Framework**: FastAPI
+- **Language**: Python 3.10+
+- **Database**: Firebase Firestore
+- **Authentication**: Firebase Admin SDK
+- **Data Validation**: Pydantic
 - **CORS**: FastAPI Middleware
 
 ### Infrastructure
-- **호스팅**: Firebase App Hosting (예정)
-- **데이터베이스**: Firestore
-- **스토리지**: Firebase Storage (미구현)
-- **인증**: Firebase Authentication
+- **Hosting**: Firebase App Hosting (planned)
+- **Database**: Firestore
+- **Storage**: Firebase Storage (not implemented)
+- **Authentication**: Firebase Authentication
 
 ---
 
-## 📝 다음 단계 (우선순위)
+## 📝 Next Steps (Priority)
 
-### 단기 (1-2주)
-1. **비밀번호 재설정 기능 구현** (6단계)
-2. **더미 데이터를 Firestore로 마이그레이션**
-   - `backend/scripts/create_dummy_data.py` 실행
-   - 실제 동아리, 사용자, 이벤트 데이터 생성
-3. **Admin Dashboard 실제 데이터 연동**
-   - 이벤트 생성/편집 API 연동
-   - 공지사항 CRUD API 구현 및 연동
+### Short-term (1-2 weeks)
+1. **Implement password reset** (Step 6)
+2. **Migrate dummy data to Firestore**
+   - Run `backend/scripts/create_dummy_data.py`
+   - Create real clubs, users, and event data
+3. **Admin Dashboard real data integration**
+   - Event creation/editing API integration
+   - Announcement CRUD API implementation and integration
 
-### 중기 (3-4주)
-4. **이벤트 관리 시스템 완성**
-   - 백엔드 Events API 구현
-   - 출석 체크 기능
-   - 캘린더 통합
-5. **구독 시스템 구현**
+### Mid-term (3-4 weeks)
+4. **Complete event management system**
+   - Backend Events API implementation
+   - Attendance check functionality
+   - Calendar integration
+5. **Implement subscription system**
    - Subscriptions API
-   - 알림 설정
-6. **AI 추천 시스템 프론트엔드 연동**
+   - Notification settings
+6. **AI recommendation system frontend integration**
 
-### 장기 (1-2개월)
-7. **검색 및 필터링 고도화**
-8. **알림 시스템** (FCM, Email)
-9. **파일 업로드** (Firebase Storage)
-10. **성능 최적화 및 테스트**
-
----
-
-## 📚 관련 문서
-- [AUTHENTICATION_DESIGN.md](./AUTHENTICATION_DESIGN.md) - 인증 시스템 상세 설계
-- [DEVELOPMENT.md](./DEVELOPMENT.md) - 개발 가이드
-- [TESTING.md](./TESTING.md) - 테스트 가이드
-- [README.md](./README.md) - 프로젝트 개요
+### Long-term (1-2 months)
+7. **Search & filtering enhancements**
+8. **Notification system** (FCM, Email)
+9. **File upload** (Firebase Storage)
+10. **Performance optimization and testing**
 
 ---
 
-## 📌 중요 메모
-
-### 완료된 주요 마일스톤
-1. ✅ Firebase 프로젝트 설정 완료 (2026-01-31)
-2. ✅ 3-Role 인증 시스템 구현 완료 (Student, ClubLeader, SuperAdmin)
-3. ✅ SuperAdmin 초기 계정 생성 및 로그인 성공
-4. ✅ 로그아웃 기능 전체 역할에 구현
-5. ✅ 프로필 편집 기능 전체 역할에 구현
-6. ✅ SuperAdmin 리더 권한 요청 관리 UI 완성
-
-### 테스트 완료 항목
-- ✅ SuperAdmin 로그인 (`superadmin@gmail.com` / `Super123`)
-- ✅ SuperAdmin 대시보드 접근
-- ✅ 역할 기반 접근 제어 (ProtectedRoute)
-
-### 보안 주의사항
-- ⚠️ 프로덕션 배포 시 SuperAdmin 비밀번호 반드시 변경 필요
-- ⚠️ Firebase API Key 및 Service Account Key 절대 커밋하지 말 것
-- ⚠️ CORS 설정을 프로덕션 도메인으로 제한할 것
+## 📚 Related Documentation
+- [AUTHENTICATION_DESIGN.md](./AUTHENTICATION_DESIGN.md) - Authentication system detailed design
+- [DEVELOPMENT.md](./DEVELOPMENT.md) - Development guide
+- [TESTING.md](./TESTING.md) - Testing guide
+- [README.md](./README.md) - Project overview
 
 ---
 
-**마지막 업데이트**: 2026-01-31  
-**작성자**: AI Coding Assistant  
-**프로젝트 상태**: 인증 시스템 완료, 추가 기능 개발 진행 예정
+## 📌 Important Notes
+
+### Completed Major Milestones
+1. ✅ Firebase project setup complete (2026-01-31)
+2. ✅ 3-Role authentication system implemented (Student, ClubLeader, SuperAdmin)
+3. ✅ SuperAdmin initial account creation and login successful
+4. ✅ Logout functionality implemented for all roles
+5. ✅ Profile editing implemented for all roles
+6. ✅ SuperAdmin leader access request management UI complete
+
+### Tested Items
+- ✅ SuperAdmin login (`superadmin@gmail.com` / `Super123`)
+- ✅ SuperAdmin dashboard access
+- ✅ Role-based access control (ProtectedRoute)
+
+### Security Notes
+- ⚠️ Must change SuperAdmin password before production deployment
+- ⚠️ Never commit Firebase API Key or Service Account Key
+- ⚠️ Restrict CORS settings to production domain
+
+---
+
+**Last updated**: 2026-01-31  
+**Author**: AI Coding Assistant  
+**Project status**: Authentication system complete, additional feature development planned

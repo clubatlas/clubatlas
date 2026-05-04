@@ -1,6 +1,6 @@
 /**
  * ClubAtlas API Client
- * 백엔드 API와 통신하기 위한 클라이언트 유틸리티
+ * Client utility for communicating with the backend API
  */
 import { getIdToken } from '../firebase/auth';
 
@@ -13,14 +13,14 @@ export interface ApiResponse<T = any> {
 }
 
 /**
- * API 요청 헬퍼 함수
+ * API request helper function
  */
 export async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
   try {
-    // FormData인 경우 Content-Type을 설정하지 않음 (브라우저가 자동 설정)
+    // Do not set Content-Type for FormData (browser sets it automatically)
     const isFormData = options.body instanceof FormData;
     
     const headers: HeadersInit = isFormData
@@ -30,7 +30,7 @@ export async function apiRequest<T>(
           ...options.headers,
         };
     
-    // Authorization 헤더가 없고, 인증이 필요한 엔드포인트인 경우 자동으로 토큰 추가
+    // Automatically add token if Authorization header is missing and endpoint requires auth
     if (!headers['Authorization' as keyof HeadersInit] && 
         !endpoint.includes('/api/auth/signup')) {
       try {
@@ -39,7 +39,7 @@ export async function apiRequest<T>(
           (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
         }
       } catch (err) {
-        // 토큰 가져오기 실패 시 무시 (공개 엔드포인트일 수 있음)
+        // Ignore token fetch failure (may be a public endpoint)
       }
     }
 
@@ -78,17 +78,17 @@ export async function apiRequest<T>(
 }
 
 /**
- * API 클라이언트
+ * API client
  */
 export const apiClient = {
   /**
-   * GET 요청
+   * GET request
    */
   get: <T = any>(endpoint: string, options?: RequestInit) =>
     apiRequest<T>(endpoint, { ...options, method: 'GET' }),
 
   /**
-   * POST 요청
+   * POST request
    */
   post: <T = any>(endpoint: string, body?: any, options?: RequestInit) =>
     apiRequest<T>(endpoint, {
@@ -98,7 +98,7 @@ export const apiClient = {
     }),
 
   /**
-   * PUT 요청
+   * PUT request
    */
   put: <T = any>(endpoint: string, body?: any, options?: RequestInit) =>
     apiRequest<T>(endpoint, {
@@ -108,21 +108,21 @@ export const apiClient = {
     }),
 
   /**
-   * DELETE 요청
+   * DELETE request
    */
   delete: <T = any>(endpoint: string, options?: RequestInit) =>
     apiRequest<T>(endpoint, { ...options, method: 'DELETE' }),
 };
 
 /**
- * 헬스체크
+ * Health check
  */
 export async function checkHealth(): Promise<ApiResponse<{ status: string; service: string }>> {
   return apiClient.get('/health');
 }
 
 /**
- * API 상태 확인
+ * API status check
  */
 export async function getApiStatus(): Promise<ApiResponse<{
   message: string;

@@ -3,7 +3,6 @@ import Logo from './components/Logo';
 import AccessCard from './components/AccessCard';
 import FeatureCard from './components/FeatureCard';
 
-// Welcome 페이지 전용 아이콘
 const studentIcon = "/images/icons/welcome/student-icon.svg";
 const adminIcon = "/images/icons/welcome/admin-icon.svg";
 const clubDiscoveryIcon = "/images/icons/welcome/club-discovery.svg";
@@ -14,14 +13,12 @@ export default function WelcomePage() {
   return (
     <div className={styles.container}>
       <div className={styles.background}>
-        {/* 배경 블러 효과 원형 장식 */}
         <div className={styles.blurCircle1}></div>
         <div className={styles.blurCircle2}></div>
         <div className={styles.blurCircle3}></div>
       </div>
-      
+
       <div className={styles.content}>
-        {/* 상단 섹션: 로고 + 헤더 */}
         <div className={styles.headerSection}>
           <Logo />
           <h1 className={styles.mainTitle}>ClubAtlas</h1>
@@ -30,7 +27,6 @@ export default function WelcomePage() {
           </p>
         </div>
 
-        {/* 중앙 섹션: 접근 카드 */}
         <div className={styles.accessCards}>
           <AccessCard
             type="student"
@@ -50,7 +46,6 @@ export default function WelcomePage() {
           />
         </div>
 
-        {/* 하단 섹션: Platform Features */}
         <div className={styles.featuresSection}>
           <h2 className={styles.featuresTitle}>Platform Features</h2>
           <div className={styles.featuresGrid}>
@@ -72,7 +67,6 @@ export default function WelcomePage() {
           </div>
         </div>
 
-        {/* 푸터 */}
         <p className={styles.footer}>
           Connecting students with their perfect campus communities
         </p>
@@ -80,4 +74,3 @@ export default function WelcomePage() {
     </div>
   );
 }
-

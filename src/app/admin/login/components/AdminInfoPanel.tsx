@@ -12,10 +12,9 @@ export default function AdminInfoPanel({ role }: AdminInfoPanelProps) {
       <div className={styles.panel} style={{
         background: 'linear-gradient(123.76deg, rgba(15, 58, 41, 1) 0%, rgba(42, 100, 77, 1) 100%)'
       }}>
-        {/* 배경 장식 원형 */}
         <div className={styles.decorativeCircle1}></div>
         <div className={styles.decorativeCircle2}></div>
-        
+
         <div className={styles.content}>
           <div className={`${styles.iconContainer} ${styles.iconContainerSuperAdmin}`}>
             <img 
@@ -57,10 +56,9 @@ export default function AdminInfoPanel({ role }: AdminInfoPanelProps) {
     <div className={styles.panel} style={{
       background: 'linear-gradient(180deg, #4f812b 0%, #3d6522 100%)'
     }}>
-      {/* 배경 장식 원형 */}
       <div className={styles.decorativeCircle1}></div>
       <div className={styles.decorativeCircle2}></div>
-      
+
       <div className={styles.content}>
         <div className={styles.iconContainer}>
           <img 

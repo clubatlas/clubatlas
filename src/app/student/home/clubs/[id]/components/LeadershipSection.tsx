@@ -2,7 +2,7 @@
 
 import styles from './LeadershipSection.module.css';
 
-const profileIcon = "/images/icons/profile.svg"; // 공용 프로필 아이콘
+const profileIcon = "/images/icons/profile.svg";
 
 interface LeadershipSectionProps {
   clubId: string;

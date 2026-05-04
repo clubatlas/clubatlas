@@ -1,5 +1,5 @@
 """
-Subscriptions API 엔드포인트
+Subscriptions API endpoints
 """
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -23,11 +23,11 @@ async def subscribe_to_club(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    동아리 구독
-    
-    - 인증된 사용자 전용
-    - 중복 구독 방지
-    - 동아리 통계 자동 업데이트
+    Subscribe to club
+
+    - Authenticated users only
+    - Prevents duplicate subscriptions
+    - Automatically updates club statistics
     """
     user_id = current_user['uid']
     club_id = subscription_data.club_id
@@ -69,10 +69,10 @@ async def unsubscribe_from_club(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    동아리 구독 취소
-    
-    - 인증된 사용자 전용
-    - 동아리 통계 자동 업데이트
+    Unsubscribe from club
+
+    - Authenticated users only
+    - Automatically updates club statistics
     """
     user_id = current_user['uid']
     
@@ -97,10 +97,10 @@ async def get_my_subscriptions(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    내 구독 목록 조회
-    
-    - 인증된 사용자 전용
-    - 활성 구독만 반환
+    Get my subscription list
+
+    - Authenticated users only
+    - Returns active subscriptions only
     """
     user_id = current_user['uid']
     
@@ -140,9 +140,9 @@ async def check_subscription(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    특정 동아리 구독 여부 확인
-    
-    - 인증된 사용자 전용
+    Check subscription status for a club
+
+    - Authenticated users only
     """
     user_id = current_user['uid']
     
@@ -170,9 +170,9 @@ async def update_notification_settings(
     current_user: dict = Depends(get_current_user)
 ):
     """
-    알림 설정 업데이트
-    
-    - 인증된 사용자 전용
+    Update notification settings
+
+    - Authenticated users only
     """
     user_id = current_user['uid']
     
@@ -216,10 +216,10 @@ async def get_club_subscribers(
     current_user: dict = Depends(require_club_leader)
 ):
     """
-    동아리 구독자 목록 조회
-    
-    - 동아리 리더 또는 관리자 전용
-    - 사용자 정보(이메일, 이름) 포함
+    Get club subscriber list
+
+    - Club leader or admin only
+    - Includes user info (email, name)
     """
     user_id = current_user['uid']
     

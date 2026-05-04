@@ -1,8 +1,8 @@
 """
-클럽 생성 요청 API
+Club creation request API
 
-- 비인증 사용자가 새 클럽 생성을 신청할 수 있는 공개 엔드포인트
-- SuperAdmin이 승인/거부할 수 있는 관리 엔드포인트
+- Public endpoint for unauthenticated users to request new club creation
+- Admin endpoints for SuperAdmin to approve/reject requests
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
@@ -45,10 +45,10 @@ class ClubCreationRequestRejection(BaseModel):
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def submit_club_creation_request(request_data: ClubCreationRequestCreate):
     """
-    클럽 생성 신청 (공개 엔드포인트 - 인증 불필요)
+    Submit a club creation request (public endpoint - no authentication required)
 
-    - 로그인 페이지의 "Create a New Club" 모달에서 호출
-    - club_creation_requests 컬렉션에 pending 상태로 저장
+    - Called from the "Create a New Club" modal on the login page
+    - Saved to club_creation_requests collection with pending status
     """
     if not request_data.club_name.strip():
         raise HTTPException(
@@ -84,10 +84,10 @@ async def approve_club_creation_request(
     current_user: dict = Depends(require_super_admin)
 ):
     """
-    클럽 생성 요청 승인 (SuperAdmin 전용)
+    Approve a club creation request (SuperAdmin only)
 
-    - 실제로 클럽을 Firestore에 생성
-    - 요청 상태를 approved로 변경
+    - Actually creates the club in Firestore
+    - Sets request status to approved
     """
     doc = await firestore_service.get_document(COLLECTION, request_id)
     if not doc:
@@ -130,7 +130,7 @@ async def reject_club_creation_request(
     current_user: dict = Depends(require_super_admin)
 ):
     """
-    클럽 생성 요청 거부 (SuperAdmin 전용)
+    Reject a club creation request (SuperAdmin only)
     """
     doc = await firestore_service.get_document(COLLECTION, request_id)
     if not doc:

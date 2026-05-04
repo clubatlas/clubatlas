@@ -1,5 +1,5 @@
 """
-ClubAtlas 데이터 모델
+ClubAtlas data models
 """
 from app.models.user import (
     UserProfile,

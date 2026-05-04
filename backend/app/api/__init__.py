@@ -1,5 +1,5 @@
 """
-API 라우터 모듈
+API router module
 """
 from fastapi import APIRouter
 from app.api import users, clubs, recommendations, test_recommendations, auth, subscriptions, events, announcements, upload, bookmarks, notifications, analytics

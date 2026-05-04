@@ -61,7 +61,7 @@ export default function ClubProfilePage({ params }: ClubProfilePageProps) {
       ]);
 
       if (clubResponse.error || !clubResponse.data) {
-        setError('클럽을 찾을 수 없습니다.');
+        setError('Club not found.');
         return;
       }
 
@@ -76,7 +76,7 @@ export default function ClubProfilePage({ params }: ClubProfilePageProps) {
       }
     } catch (err) {
       console.error('Failed to load club data:', err);
-      setError('클럽 데이터를 불러오는데 실패했습니다.');
+      setError('Failed to load club data.');
     } finally {
       setIsLoading(false);
     }
@@ -163,7 +163,7 @@ export default function ClubProfilePage({ params }: ClubProfilePageProps) {
         fontSize: '18px',
         color: '#666'
       }}>
-        <p>{error || '클럽을 찾을 수 없습니다.'}</p>
+        <p>{error || 'Club not found.'}</p>
         <button onClick={() => router.back()} style={{ marginTop: '20px', color: '#007bff', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px' }}>
           ← Back
         </button>

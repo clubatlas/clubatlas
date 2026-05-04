@@ -20,7 +20,6 @@
   overflow: hidden;
 }
 
-/* 배경 블러 효과 원형 장식 */
 .blurCircle1 {
   position: absolute;
   width: 315.242px;
@@ -70,7 +69,6 @@
   box-sizing: border-box;
 }
 
-/* 중앙 로그인 카드 */
 .loginCard {
   display: flex;
   width: 1088px;
@@ -82,7 +80,6 @@
   overflow: hidden;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 1199px) {
   .container {
     min-width: 100%;

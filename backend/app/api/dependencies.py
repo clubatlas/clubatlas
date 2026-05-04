@@ -1,5 +1,5 @@
 """
-API 의존성 함수들
+API dependency functions
 """
 from typing import Optional
 from fastapi import Depends, HTTPException, status, Header
@@ -8,16 +8,16 @@ from app.services.auth_service import verify_id_token
 
 async def get_current_user(authorization: Optional[str] = Header(None)) -> dict:
     """
-    현재 인증된 사용자 정보 가져오기
-    
+    Get current authenticated user info.
+
     Args:
-        authorization: Authorization 헤더 (Bearer 토큰)
-    
+        authorization: Authorization header (Bearer token)
+
     Returns:
-        검증된 사용자 정보 (uid, email 등)
-    
+        Verified user info (uid, email, etc.)
+
     Raises:
-        HTTPException: 인증 실패 시
+        HTTPException: on authentication failure
     """
     if not authorization:
         raise HTTPException(
@@ -25,7 +25,7 @@ async def get_current_user(authorization: Optional[str] = Header(None)) -> dict:
             detail="Authorization header missing",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     try:
         scheme, token = authorization.split()
         if scheme.lower() != "bearer":
@@ -40,16 +40,16 @@ async def get_current_user(authorization: Optional[str] = Header(None)) -> dict:
             detail="Invalid authorization header format",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     user = await verify_id_token(token)
-    
+
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     return user
 
 
@@ -57,17 +57,17 @@ async def get_current_user_optional(
     authorization: Optional[str] = Header(None)
 ) -> Optional[dict]:
     """
-    현재 사용자 정보 가져오기 (선택적)
-    인증되지 않은 경우 None 반환
+    Get current user info (optional).
+    Returns None if not authenticated.
     """
     if not authorization:
         return None
-    
+
     try:
         scheme, token = authorization.split()
         if scheme.lower() != "bearer":
             return None
-        
+
         user = await verify_id_token(token)
         return user
     except (ValueError, AttributeError):
@@ -79,65 +79,63 @@ async def require_role(
     current_user: dict = Depends(get_current_user)
 ) -> dict:
     """
-    특정 역할 필요 (의존성 팩토리)
-    
+    Require a specific role (dependency factory).
+
     Args:
-        required_role: 필요한 역할
-        current_user: 현재 사용자
-    
+        required_role: Required role
+        current_user: Current user
+
     Returns:
-        검증된 사용자 정보
-    
+        Verified user info
+
     Raises:
-        HTTPException: 권한 부족 시
+        HTTPException: on insufficient permissions
     """
     user_role = current_user.get('role') or current_user.get('custom_claims', {}).get('role')
-    
+
     if user_role != required_role:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail=f"Role '{required_role}' required"
         )
-    
+
     return current_user
 
 
 def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
-    """관리자 권한 필요"""
+    """Require admin role"""
     user_role = current_user.get('role') or current_user.get('custom_claims', {}).get('role')
-    
+
     if user_role not in ['admin', 'super-admin']:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Admin role required"
         )
-    
+
     return current_user
 
 
 def require_club_leader(current_user: dict = Depends(get_current_user)) -> dict:
-    """동아리 리더 권한 필요"""
+    """Require club leader role"""
     user_role = current_user.get('role') or current_user.get('custom_claims', {}).get('role')
-    
+
     if user_role not in ['club-leader', 'admin', 'super-admin']:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Club leader role required"
         )
-    
+
     return current_user
 
 
 def require_super_admin(current_user: dict = Depends(get_current_user)) -> dict:
-    """슈퍼 관리자 권한 필요"""
+    """Require super admin role"""
     user_role = current_user.get('role') or current_user.get('custom_claims', {}).get('role')
-    
+
     if user_role != 'super-admin':
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Super admin role required"
         )
-    
+
     return current_user
-
-

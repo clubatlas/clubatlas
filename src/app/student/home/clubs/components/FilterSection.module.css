@@ -54,7 +54,6 @@
   color: #1a1a1a;
 }
 
-/* Chevron 아이콘을 CSS로 구현 */
 .selectWrapper::after {
   content: '';
   position: absolute;

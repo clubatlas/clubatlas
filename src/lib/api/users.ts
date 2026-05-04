@@ -1,5 +1,5 @@
 /**
- * Users API 클라이언트
+ * Users API client
  */
 import { apiClient, ApiResponse } from './client';
 

@@ -1,17 +1,17 @@
 """
-이벤트 리마인더 스케줄러
+Event reminder scheduler
 
-- 매 interval_seconds(기본 3600초 = 1시간)마다 실행
-- 7일 이내 예정된 active 이벤트 중 아직 1주일 리마인더를 발송하지 않은 이벤트에 알림 발송
-- 1일 이내 예정된 active 이벤트 중 아직 1일 리마인더를 발송하지 않은 이벤트에 알림 발송
-- 중복 발송 방지를 위해 이벤트 문서에 reminder_1week_sent / reminder_1day_sent 플래그 사용
+- Runs every interval_seconds (default 3600s = 1 hour)
+- Sends 1-week reminders for active events scheduled within 7 days that haven't been notified yet
+- Sends 1-day reminders for active events scheduled within 1 day that haven't been notified yet
+- Uses reminder_1week_sent / reminder_1day_sent flags on event documents to prevent duplicate sends
 """
 import asyncio
 from datetime import datetime, timedelta
 
 
 async def send_upcoming_event_reminders() -> None:
-    """1주일/1일 전 이벤트 리마인더 알림 발송"""
+    """Send 1-week / 1-day event reminder notifications"""
     from app.services.firestore_service import (
         event_service, club_service, subscription_service, notification_service, user_service
     )
@@ -108,7 +108,7 @@ async def send_upcoming_event_reminders() -> None:
 
 
 async def run_scheduler(interval_seconds: int = 3600) -> None:
-    """interval_seconds 간격으로 리마인더 발송 체크를 반복 실행"""
+    """Repeatedly run reminder checks at interval_seconds intervals"""
     print(f"[Scheduler] Event reminder scheduler started (interval: {interval_seconds}s)")
     while True:
         try:

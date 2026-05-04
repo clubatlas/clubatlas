@@ -78,7 +78,7 @@ export default function LeadersTable({ searchQuery = '' }: LeadersTableProps) {
             email: leaderInfo.email,
             club: clubName,
             clubId: clubIds[idx] || '',
-            role: leaderInfo.role === 'admin' ? 'Admin' : 'President',
+            role: 'Cohead',
             status: leaderInfo.status.toUpperCase() as 'ACTIVE' | 'INACTIVE',
           }));
         });
