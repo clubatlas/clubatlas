@@ -25,46 +25,34 @@ Club leaders can:
 
 2. **Club Calendar**
    - Unified calendar showing upcoming meetings/events
-   - Filter by date, club, or category
-   - Easy to scan in timeline/month/week style
+   - Month/week view, iCal export, event attendance registration
+   - Club leaders can create and manage events directly from the calendar
 
 3. **AI Recommendation Assistant**
-   - Suggests relevant clubs based on:
-     - User-stated interests (e.g., tags/checkboxes)
-     - Usage behavior (viewed clubs, subscribed clubs, attended events) — when available
-   - Supports:
-     - Active queries (user requests: "Recommend clubs for someone who likes X and Y")
-     - Passive discovery (suggestion list on dashboard/home)
+   - Suggests relevant clubs based on user-stated interests (tags/checkboxes) and usage behavior
+   - Hybrid Collaborative Filtering (content-based + collaborative filtering)
+   - Preference input → backend scoring → ranked club list
 
 4. **Subscription & Notification System**
-   - Students can "follow/subscribe" to clubs
-   - Receive timely notifications (email and/or in-app) for:
-     - New announcements
-     - Upcoming meeting reminders
-     - Major updates (e.g., time/location changes)
+   - Students can subscribe/unsubscribe to clubs with per-club notification settings
+   - In-app notifications for event reminders, cancellations, and announcements
 
-5. **Club Leader / Admin Dashboard**
-   - Club leaders can:
-     - Edit club profile information
-     - Create and edit events (including schedule and location)
-     - Post announcements
-   - Access is permission-based (leader vs. regular student)
+5. **Club Leader Dashboard**
+   - Event management (create/edit/delete, send reminders)
+   - Announcement management (create/edit/delete)
+   - Subscriber management with details
+   - Club profile editing (basic info, leadership, meeting info, photo gallery)
+   - Analytics dashboard
 
-6. **Cross-Club Collaboration Board**
-   - A shared board where clubs can:
-     - Post joint events
-     - Propose collaborations
-   - Students can discover these joint events
+6. **SuperAdmin Dashboard**
+   - Leader access request management (approve/reject with club assignment)
+   - Password reset request management
+   - All clubs management (create/edit/deactivate)
+   - Student users overview with activity charts
+   - Platform analytics and system settings
 
-### Optional Features (Phase 2)
-
-- **Student Dashboard ("My Page")**
-  - Personal overview: subscribed clubs, past participation, saved recommendations
-  - Architecture should support this, but UI can be minimal in the first iteration
-
-- **Social Interaction Features**
-  - Lightweight engagement: comments, reactions
-  - Design system should support easy addition later
+7. **Student My Page**
+   - Personal overview: subscribed clubs, attendance history, saved recommendations
 
 ## Engineering Principles
 
@@ -109,24 +97,19 @@ Club leaders can:
   - Creation date, modification date
   - Visibility status
 
-- **Collaboration Post / Cross-Club Event**
-  - Joint post spanning multiple clubs (e.g., many-to-many relationship with clubs)
-  - Title, description, date/time, location
-  - Supports "Cross-Club Collaboration Board"
+- **Notification**
+  - Tracks notifications per user
+  - Type (event reminder, event cancelled, announcement, etc.)
 
-- **Notification / Email Queue** (if implemented)
-  - Tracks notifications to send or recently sent
-  - Type (event reminder, announcement, etc.)
-
-- **Recommendation Data / Recommendation History** (optional)
-  - For logging or storing scores from the recommendation engine
+- **Recommendation Data / Recommendation History**
+  - Logs recommendation scores from the recommendation engine
 
 ### AI Recommendation Engine
 
-- For MVP, design the system so recommendation logic is **modular**:
-  - Start simple (e.g., rule-based: tag matching between user interests and club tags)
-  - Make it easy to replace/extend with ML/LLM-based recommendations later
-- Encapsulate recommendation logic in a dedicated module/service file
+- Recommendation logic is implemented as a **modular service** (`backend/app/services/recommendation_service.py`):
+  - Hybrid Collaborative Filtering (content-based + collaborative filtering)
+  - Extensible to ML/LLM-based approaches
+- Frontend preference input → backend scoring → ranked club list
 
 ## Non-Functional & UX Considerations
 
@@ -169,9 +152,9 @@ When prioritizing work or making tradeoffs, follow this order:
 2. **Club events and calendar**
 3. **Subscriptions and notifications**
 4. **Club leader dashboard**
-5. **Cross-club collaboration board**
-6. **Simple, modular AI recommendations (start rule-based)**
-7. Optional: Student "My Page" dashboard, social features
+5. **SuperAdmin dashboard**
+6. **AI recommendations**
+7. **Student "My Page" dashboard**
 
 If implementing something of lower priority requires minimal additional effort at the current stage (e.g., adding a column now to avoid migration headaches later), that is acceptable — but must be clearly documented.
 
@@ -201,32 +184,5 @@ When given a task, follow this structure:
 
 - [DEVELOPMENT.md](./DEVELOPMENT.md) - Development workflow and guidelines
 - [TESTING.md](./TESTING.md) - Testing procedures and troubleshooting
-- [IMPLEMENTATION_STATUS.md](./IMPLEMENTATION_STATUS.md) - Implemented and unimplemented feature status
 - [AUTHENTICATION_DESIGN.md](./AUTHENTICATION_DESIGN.md) - Authentication system detailed design
 - [ICON_REFERENCE.md](./ICON_REFERENCE.md) - Icon usage guidelines
-
----
-
-## 🎯 Current Status (2026-01-31)
-
-### ✅ Completed Features
-- **3-Role Authentication System** (Student, ClubLeader, SuperAdmin)
-- **Role-Based Access Control (RBAC)**
-- **Login/Signup for all roles**
-- **Leader Access Request System**
-- **SuperAdmin Management UI** (Pending Requests approval/rejection)
-- **Profile Editing** (all roles)
-- **Logout Functionality** (all roles)
-
-### 🚧 In Progress
-- None (All planned authentication features completed)
-
-### ⏸️ Pending Features
-- Password Reset (Forgot Password)
-- Event Management System
-- Subscription System
-- AI Recommendations Frontend Integration
-- File Upload (Firebase Storage)
-- Real-time Notifications
-
-**See [IMPLEMENTATION_STATUS.md](./IMPLEMENTATION_STATUS.md) for detailed implementation status.**
