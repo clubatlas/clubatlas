@@ -13,7 +13,7 @@ class Settings:
     # CORS settings
     ALLOWED_ORIGINS: list[str] = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000"
+        "http://localhost:3000,http://127.0.0.1:3000,https://concordacademyclubs.com,https://www.concordacademyclubs.com"
     ).split(",")
 
     # Server settings
